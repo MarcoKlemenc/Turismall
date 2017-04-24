@@ -17,6 +17,7 @@ namespace Turismall.Controllers
 
         public String Index()
         {
+            return "Aca deberia aparecer un viaje";
         }
 
         // GET: Viaje/Details/5
