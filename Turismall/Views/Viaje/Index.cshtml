@@ -17,9 +17,13 @@
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
+            <label asp-for="Nota" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Nota" class="form-control" />
+                <span asp-validation-for="Nota" class="text-danger"></span>
+            </div>
         </div>
 
-        <textarea name="nota" rows="10" cols="40">Escribe tu nota</textarea>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
