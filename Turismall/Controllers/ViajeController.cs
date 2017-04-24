@@ -10,14 +10,9 @@ namespace Turismall.Controllers
     public class ViajeController : Controller
     {
         // GET: Viaje
-        /*public ActionResult Index()
+        public ActionResult Index()
         {
-            //return View();
-        }*/
-
-        public String Index()
-        {
-            return "Aca deberia aparecer un viaje";
+            return View();
         }
 
         // GET: Viaje/Details/5
