@@ -2,92 +2,152 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Turismall.Data;
+using Turismall.Models;
 
 namespace Turismall.Controllers
 {
     public class ViajeController : Controller
     {
-        // GET: Viaje
-        public ActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public ViajeController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;    
+        }
+
+        // GET: Viaje
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Viaje.ToListAsync());
         }
 
         // GET: Viaje/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var viaje = await _context.Viaje
+                .SingleOrDefaultAsync(m => m.ID == id);
+            if (viaje == null)
+            {
+                return NotFound();
+            }
+
+            return View(viaje);
         }
 
         // GET: Viaje/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
 
         // POST: Viaje/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("ID,Nombre,Descripcion")] Viaje viaje)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                _context.Add(viaje);
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(viaje);
         }
 
         // GET: Viaje/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var viaje = await _context.Viaje.SingleOrDefaultAsync(m => m.ID == id);
+            if (viaje == null)
+            {
+                return NotFound();
+            }
+            return View(viaje);
         }
 
         // POST: Viaje/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Nombre,Descripcion")] Viaje viaje)
         {
-            try
+            if (id != viaje.ID)
             {
-                // TODO: Add update logic here
+                return NotFound();
+            }
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(viaje);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ViajeExists(viaje.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(viaje);
         }
 
         // GET: Viaje/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var viaje = await _context.Viaje
+                .SingleOrDefaultAsync(m => m.ID == id);
+            if (viaje == null)
+            {
+                return NotFound();
+            }
+
+            return View(viaje);
         }
 
         // POST: Viaje/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var viaje = await _context.Viaje.SingleOrDefaultAsync(m => m.ID == id);
+            _context.Viaje.Remove(viaje);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        private bool ViajeExists(int id)
+        {
+            return _context.Viaje.Any(e => e.ID == id);
         }
     }
 }
