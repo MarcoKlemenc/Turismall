@@ -17,13 +17,20 @@
         <tr>
             <td class="col-md-10">
                 <h4>@Html.DisplayFor(modelItem => item.Nombre)</h4>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td class="col-md-2" style="text-align: right">
-                <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil" /></a>
-                <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-file" /></a>
-                <a asp-action="Delete" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-trash" /></a>
-            </td>
+                @if (String.IsNullOrEmpty(item.Descripcion))
+                {
+                    <h5>No hay descripcion.</h5>
+                } else
+                {
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                }
+
+           </td>
+        <td class="col-md-2" style="text-align: right">
+            <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil" /></a>
+            <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-file" /></a>
+            <a asp-action="Delete" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-trash" /></a>
+        </td>
         </tr>
     }
 </table>
