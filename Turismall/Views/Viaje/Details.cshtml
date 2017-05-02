@@ -20,7 +20,15 @@
             @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Descripcion)
+            @if (String.IsNullOrEmpty(@Model.Descripcion))
+                {
+                <h5>No hay descripción.</h5>
+                } else
+                {
+                @Html.DisplayFor(model => model.Descripcion)
+                }
+
+
         </dd>
     </dl>
 </div>
