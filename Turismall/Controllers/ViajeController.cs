@@ -149,5 +149,56 @@ namespace Turismall.Controllers
         {
             return _context.Viaje.Any(e => e.ID == id);
         }
+
+        // GET: Viaje/Note/5
+        public async Task<IActionResult> Note(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var viaje = await _context.Viaje.SingleOrDefaultAsync(m => m.ID == id);
+            if (viaje == null)
+            {
+                return NotFound();
+            }
+            return View(viaje);
+        }
+
+        // POST: Viaje/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Note(int id, [Bind("ID,Nombre,Descripcion")] Viaje viaje)
+        {
+            if (id != viaje.ID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(viaje);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ViajeExists(viaje.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            return View(viaje);
+        }
     }
 }
