@@ -30,7 +30,9 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil" /></a>
+<div class="col-md-2">
     <a asp-action="Index" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" /></a>
+</div>
+<div class="col-md-10">
+    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil" /></a>
 </div>
