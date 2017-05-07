@@ -7,7 +7,7 @@
 <h2>Detalles</h2>
 
 <div>
-       <dl class="dl-horizontal">
+    <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
@@ -20,7 +20,7 @@
         <dd>
             @if (String.IsNullOrEmpty(@Model.Descripcion))
                 {
-                <h5>No hay descripción.</h5>
+                <p>No hay descripciÃ³n.</p>
                 } else
                 {
                 @Html.DisplayFor(model => model.Descripcion)
@@ -31,6 +31,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Editar</a> |
-    <a asp-action="Index">Volver a la lista</a>
+    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil" /></a>
+    <a asp-action="Index" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" /></a>
 </div>
