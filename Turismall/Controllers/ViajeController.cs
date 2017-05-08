@@ -86,7 +86,7 @@ namespace Turismall.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Nombre,Descripcion")] Viaje viaje)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Nombre,Descripcion,Nota")] Viaje viaje)
         {
             if (id != viaje.ID)
             {
@@ -162,41 +162,6 @@ namespace Turismall.Controllers
             if (viaje == null)
             {
                 return NotFound();
-            }
-            return View(viaje);
-        }
-
-        // POST: Viaje/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Note(int id, [Bind("ID,Nombre,Descripcion")] Viaje viaje)
-        {
-            if (id != viaje.ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(viaje);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ViajeExists(viaje.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Index");
             }
             return View(viaje);
         }
