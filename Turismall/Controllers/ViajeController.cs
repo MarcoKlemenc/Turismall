@@ -54,7 +54,7 @@ namespace Turismall.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Nombre,Descripcion")] Viaje viaje)
+        public async Task<IActionResult> Create([Bind("ID,Usuario,Nombre,Descripcion")] Viaje viaje)
         {
             if (ModelState.IsValid)
             {

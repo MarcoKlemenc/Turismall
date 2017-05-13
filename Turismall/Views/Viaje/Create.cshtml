@@ -1,4 +1,5 @@
 @model Turismall.Models.Viaje
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -9,6 +10,7 @@
 <form asp-action="Create">
     <div class="form-horizontal">
         <hr />
+        <input type="hidden" asp-for="Usuario" value="@UserManager.GetUserName(User)" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Nombre" class="col-md-2 control-label"></label>
