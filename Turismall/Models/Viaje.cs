@@ -10,7 +10,6 @@ namespace Turismall.Models
     public class Viaje
     {
         public int ID { get; set; }
-        [Required]
         public string Usuario { get; set; }
         [Required(ErrorMessage = "El nombre no puede estar vacío.")]
         public string Nombre { get; set; }
