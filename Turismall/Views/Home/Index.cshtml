@@ -4,6 +4,13 @@
 }
 
 
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-controller="Viaje" asp-action="Create"><img height="200" class="center-block" src="@Url.Content("~/Crear.png")" /></a>
+    <img height="200" class="center-block" src="@Url.Content("~/Gracias.png")" />
+}
+else
+{
+    <img height="550" src="@Url.Content("~/Home.png")" />
+}
 
-<a asp-controller="Viaje" asp-action="Create"><img height="200" class="center-block" src="@Url.Content("~/Crear.png")" /></a>
-<img height="550" src="@Url.Content("~/Home.png")" />
