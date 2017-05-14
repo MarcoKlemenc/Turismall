@@ -25,9 +25,21 @@
                 {
                 @Html.DisplayFor(model => model.Descripcion)
                 }
-
-
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nota)
+        </dt>
+        <dd>
+            @if (String.IsNullOrEmpty(@Model.Nota))
+            {
+                <p>No hay nota.</p>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Nota)
+            }
+        </dd>
+
     </dl>
 </div>
 <div class="col-md-2">
