@@ -6,11 +6,18 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <a asp-controller="Viaje" asp-action="Create"><img height="200" class="center-block" src="@Url.Content("~/Crear.png")" /></a>
-    <img height="200" class="center-block" src="@Url.Content("~/Gracias.png")" />
+    <a asp-controller="Viaje" asp-action="Create"><img height="200" class="center-block" src="@Url.Content("~/Viaje.png")" /></a>
+    <br />
+    <a asp-controller="Viaje" asp-action="Index"><img height="498" class="center-block" src="@Url.Content("~/Recuerdos.png")" /></a>
+    <br />
+    <img height="200" class="center-block" src="@Url.Content("~/Agradecimiento.png")" />
 }
 else
 {
-    <img height="550" src="@Url.Content("~/Home.png")" />
+    
+    <img height="550" src="@Url.Content("~/Info.png")" />
+    <img height="550" src="@Url.Content("~/Pages.png")" />
+    <img height="550" src="@Url.Content("~/Pasion.png")" />
+    <img height="550" src="@Url.Content("~/Picture.png")" />
 }
 
