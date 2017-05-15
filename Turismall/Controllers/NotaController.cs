@@ -24,8 +24,8 @@ namespace Turismall.Controllers
         {
             List<Nota> notas = new List<Nota>();
             notas = await _context.Nota.ToListAsync();
-            notas.Where(x => x.ViajeID == idViaje);
-            return View(notas);
+            var notasFiltradas = notas.Where(x => x.ViajeID == idViaje);
+            return View(notasFiltradas);
         }
 
         // GET: Nota/Details/5
