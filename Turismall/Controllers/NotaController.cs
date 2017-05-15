@@ -20,8 +20,12 @@ namespace Turismall.Controllers
         }
 
         // GET: Nota
-        public async Task<IActionResult> Index(int idViaje)
+        public async Task<IActionResult> Index(int? idViaje)
         {
+            if (idViaje == null)
+            {
+                return NotFound();
+            }
             List<Nota> notas = new List<Nota>();
             notas = await _context.Nota.ToListAsync();
             var notasFiltradas = notas.Where(x => x.ViajeID == idViaje);
