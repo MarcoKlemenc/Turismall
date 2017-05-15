@@ -16,7 +16,7 @@ namespace Turismall.Controllers
 
         public ViajeController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Viaje

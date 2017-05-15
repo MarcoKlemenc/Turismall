@@ -16,7 +16,7 @@ namespace Turismall.Controllers
 
         public NotaController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Nota
