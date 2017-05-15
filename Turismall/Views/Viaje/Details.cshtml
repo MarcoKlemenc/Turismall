@@ -25,9 +25,10 @@
                 {
                 @Html.DisplayFor(model => model.Descripcion)
                 }
+            @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default btn-sm pull-right" })
+            @Html.ActionLink("Ver notas", "Index", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default btn-sm pull-right" })
         </dd>
-        @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default btn-sm pull-right" })
-        @Html.ActionLink("Ver notas", "Index", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default btn-sm pull-right" })
+        
     </dl>
 </div>
 <div class="col-md-2">
