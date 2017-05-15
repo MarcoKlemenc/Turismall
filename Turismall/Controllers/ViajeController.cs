@@ -38,7 +38,7 @@ namespace Turismall.Controllers
 
             var viaje = await _context.Viaje
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (viaje == null)
+            if (viaje == null || viaje.Usuario != User.Identity.Name)
             {
                 return NotFound();
             }
@@ -78,7 +78,7 @@ namespace Turismall.Controllers
             }
 
             var viaje = await _context.Viaje.SingleOrDefaultAsync(m => m.ID == id);
-            if (viaje == null)
+            if (viaje == null || viaje.Usuario != User.Identity.Name)
             {
                 return NotFound();
             }
@@ -152,22 +152,6 @@ namespace Turismall.Controllers
         private bool ViajeExists(int id)
         {
             return _context.Viaje.Any(e => e.ID == id);
-        }
-
-        // GET: Viaje/Note/5
-        public async Task<IActionResult> Note(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var viaje = await _context.Viaje.SingleOrDefaultAsync(m => m.ID == id);
-            if (viaje == null)
-            {
-                return NotFound();
-            }
-            return View(viaje);
         }
     }
 }
