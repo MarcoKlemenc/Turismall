@@ -15,7 +15,7 @@ namespace Turismall.Models
         public string Nombre { get; set; }
         [DisplayName("Descripción")]
         public string Descripcion { get; set; }
-        public List<Nota> Nota { get; set; }
+        public List<Nota> Notas { get; set; }
 
     }
 }
