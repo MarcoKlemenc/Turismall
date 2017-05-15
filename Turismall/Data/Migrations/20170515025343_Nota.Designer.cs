@@ -8,9 +8,10 @@ using Turismall.Data;
 namespace Turismall.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170515025343_Nota")]
+    partial class Nota
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -178,13 +179,13 @@ namespace Turismall.Data.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ViajeID");
-
                     b.Property<string>("texto");
+
+                    b.Property<int>("viajeID");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ViajeID");
+                    b.HasIndex("viajeID");
 
                     b.ToTable("Nota");
                 });
@@ -247,7 +248,7 @@ namespace Turismall.Data.Migrations
                 {
                     b.HasOne("Turismall.Models.Viaje", "Viaje")
                         .WithMany("Notas")
-                        .HasForeignKey("ViajeID")
+                        .HasForeignKey("viajeID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

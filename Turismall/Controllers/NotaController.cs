@@ -20,9 +20,12 @@ namespace Turismall.Controllers
         }
 
         // GET: Nota
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int idViaje)
         {
-            return View(await _context.Nota.ToListAsync());
+            List<Nota> notas = new List<Nota>();
+            notas = await _context.Nota.ToListAsync();
+            notas.Where(x => x.ViajeID == idViaje);
+            return View(notas);
         }
 
         // GET: Nota/Details/5
@@ -44,9 +47,13 @@ namespace Turismall.Controllers
         }
 
         // GET: Nota/Create
-        public IActionResult Create()
+        public IActionResult Create(int idViaje)
         {
-            return View();
+            Nota nota = new Nota
+            {
+                ViajeID = idViaje,
+            };
+            return View(nota);
         }
 
         // POST: Nota/Create
@@ -54,7 +61,7 @@ namespace Turismall.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,texto")] Nota nota)
+        public async Task<IActionResult> Create([Bind("ID,texto,ViajeID")] Nota nota)
         {
             if (ModelState.IsValid)
             {

@@ -26,20 +26,7 @@
                 @Html.DisplayFor(model => model.Descripcion)
                 }
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Nota)
-        </dt>
-        <dd>
-            @if (String.IsNullOrEmpty(@Model.Nota))
-            {
-                <p>No hay nota.</p>
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.Nota)
-            }
-        </dd>
-
+        @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default btn-sm pull-right" })
     </dl>
 </div>
 <div class="col-md-2">
