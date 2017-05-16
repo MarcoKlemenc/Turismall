@@ -68,7 +68,7 @@ namespace Turismall.Controllers
             {
                 _context.Add(nota);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { idViaje = nota.ViajeID });
             }
             return View(nota);
         }
