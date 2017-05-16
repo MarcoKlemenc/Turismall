@@ -20,12 +20,9 @@ namespace Turismall.Controllers
         }
 
         // GET: Viaje
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            List<Viaje> viajes = new List<Viaje>();
-            viajes = await _context.Viaje.ToListAsync();
-            var viajesFiltrados = viajes.Where(x => x.Usuario == User.Identity.Name);
-            return View(viajesFiltrados);
+            return View(_context.Viaje.Where(x => x.Usuario == User.Identity.Name));
         }
 
         // GET: Viaje/Details/5
