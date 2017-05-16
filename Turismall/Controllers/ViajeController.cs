@@ -26,15 +26,15 @@ namespace Turismall.Controllers
         }
 
         // GET: Viaje/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var viaje = await _context.Viaje
-                .SingleOrDefaultAsync(m => m.ID == id);
+            var viaje = _context.Viaje
+                .SingleOrDefault(m => m.ID == id);
             if (viaje == null || viaje.Usuario != User.Identity.Name)
             {
                 return NotFound();
@@ -54,27 +54,27 @@ namespace Turismall.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Nombre,Descripcion")] Viaje viaje)
+        public IActionResult Create(Viaje viaje)
         {
             if (ModelState.IsValid)
             {
                 viaje.Usuario = User.Identity.Name;
                 _context.Add(viaje);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(viaje);
         }
 
         // GET: Viaje/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var viaje = await _context.Viaje.SingleOrDefaultAsync(m => m.ID == id);
+            var viaje = _context.Viaje.SingleOrDefault(m => m.ID == id);
             if (viaje == null || viaje.Usuario != User.Identity.Name)
             {
                 return NotFound();
@@ -87,7 +87,7 @@ namespace Turismall.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Nombre,Descripcion,Nota, Usuario")] Viaje viaje)
+        public IActionResult Edit(int id, Viaje viaje)
         {
             if (id != viaje.ID)
             {
@@ -99,7 +99,7 @@ namespace Turismall.Controllers
                 try
                 {
                     _context.Update(viaje);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,15 +118,15 @@ namespace Turismall.Controllers
         }
 
         // GET: Viaje/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var viaje = await _context.Viaje
-                .SingleOrDefaultAsync(m => m.ID == id);
+            var viaje = _context.Viaje
+                .SingleOrDefault(m => m.ID == id);
             if (viaje == null)
             {
                 return NotFound();
@@ -138,11 +138,11 @@ namespace Turismall.Controllers
         // POST: Viaje/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var viaje = await _context.Viaje.SingleOrDefaultAsync(m => m.ID == id);
+            var viaje = _context.Viaje.SingleOrDefault(m => m.ID == id);
             _context.Viaje.Remove(viaje);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 

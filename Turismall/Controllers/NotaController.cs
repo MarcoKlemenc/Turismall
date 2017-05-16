@@ -30,15 +30,15 @@ namespace Turismall.Controllers
         }
 
         // GET: Nota/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var nota = await _context.Nota
-                .SingleOrDefaultAsync(m => m.ID == id);
+            var nota = _context.Nota
+                .SingleOrDefault(m => m.ID == id);
             if (nota == null)
             {
                 return NotFound();
@@ -62,26 +62,26 @@ namespace Turismall.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,texto,ViajeID")] Nota nota)
+        public IActionResult Create(Nota nota)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(nota);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(nota);
         }
 
         // GET: Nota/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var nota = await _context.Nota.SingleOrDefaultAsync(m => m.ID == id);
+            var nota = _context.Nota.SingleOrDefault(m => m.ID == id);
             if (nota == null)
             {
                 return NotFound();
@@ -94,7 +94,7 @@ namespace Turismall.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,texto")] Nota nota)
+        public IActionResult Edit(int id, Nota nota)
         {
             if (id != nota.ID)
             {
@@ -106,7 +106,7 @@ namespace Turismall.Controllers
                 try
                 {
                     _context.Update(nota);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -125,15 +125,15 @@ namespace Turismall.Controllers
         }
 
         // GET: Nota/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var nota = await _context.Nota
-                .SingleOrDefaultAsync(m => m.ID == id);
+            var nota = _context.Nota
+                .SingleOrDefault(m => m.ID == id);
             if (nota == null)
             {
                 return NotFound();
@@ -145,11 +145,11 @@ namespace Turismall.Controllers
         // POST: Nota/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var nota = await _context.Nota.SingleOrDefaultAsync(m => m.ID == id);
+            var nota = _context.Nota.SingleOrDefault(m => m.ID == id);
             _context.Nota.Remove(nota);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
