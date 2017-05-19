@@ -8,7 +8,7 @@ namespace Turismall.Models
     public class Nota
     {
         public int ID { get; set; }
-        public string texto { get; set; }
+        public string Texto { get; set; }
 
         public int ViajeID { get; set; }
         public virtual Viaje Viaje { get; set; }
