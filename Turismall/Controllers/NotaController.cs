@@ -71,19 +71,21 @@ namespace Turismall.Controllers
             if (ModelState.IsValid)
             {
                 var files = HttpContext.Request.Form.Files;
-                var uploads = Path.Combine(_env.WebRootPath, "uploads");
+                var folder = Path.Combine("uploads", nota.ViajeID.ToString());
+                var destination = Path.Combine(_env.WebRootPath, folder);
                 foreach (var file in files)
                 {
                     if (file.Length > 0)
                     {
-                        if (!Directory.Exists(uploads))
+                        if (!Directory.Exists(destination))
                         {
-                            Directory.CreateDirectory(uploads);
+                            Directory.CreateDirectory(destination);
                         }
-                        using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                        var name = DateTime.Now.ToString("yyyyMMddHHmmssffff")+".jpg";
+                        using (var fileStream = new FileStream(Path.Combine(destination, name), FileMode.Create))
                         {
                             file.CopyTo(fileStream);
-                            nota.Foto = file.FileName;
+                            nota.Foto = Path.Combine(folder, name);
                         }
                     }
                 }
