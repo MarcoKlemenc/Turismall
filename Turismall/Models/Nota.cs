@@ -12,5 +12,7 @@ namespace Turismall.Models
 
         public int ViajeID { get; set; }
         public virtual Viaje Viaje { get; set; }
+
+        public string Foto { get; set; }
     }
 }

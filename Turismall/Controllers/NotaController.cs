@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Turismall.Data;
 using Turismall.Models;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Turismall.Controllers
 {
     public class NotaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private IHostingEnvironment _env;
 
-        public NotaController(ApplicationDbContext context)
+        public NotaController(ApplicationDbContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Nota
@@ -66,6 +70,23 @@ namespace Turismall.Controllers
         {
             if (ModelState.IsValid)
             {
+                var files = HttpContext.Request.Form.Files;
+                var uploads = Path.Combine(_env.WebRootPath, "uploads");
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        if (!Directory.Exists(uploads))
+                        {
+                            Directory.CreateDirectory(uploads);
+                        }
+                        using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                        {
+                            file.CopyTo(fileStream);
+                            nota.Foto = file.FileName;
+                        }
+                    }
+                }
                 _context.Add(nota);
                 _context.SaveChanges();
                 return RedirectToAction("Index", new { idViaje = nota.ViajeID });
