@@ -16,7 +16,11 @@
         <dd>
             @Html.DisplayFor(model => model.Texto)
         </dd>
-        <img src="@Url.Content("~/" + Model.Foto)" />
+        @if (Model.Foto != null)
+        {
+            <img src="@Url.Content("~/" + Model.Foto)" />
+        }
+        
     </dl>
 </div>
 <div>
