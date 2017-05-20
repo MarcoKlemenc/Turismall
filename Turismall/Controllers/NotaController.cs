@@ -119,7 +119,7 @@ namespace Turismall.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { idViaje = nota.ViajeID });
             }
             return View(nota);
         }
@@ -150,7 +150,7 @@ namespace Turismall.Controllers
             var nota = _context.Nota.SingleOrDefault(m => m.ID == id);
             _context.Nota.Remove(nota);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { idViaje = nota.ViajeID });
         }
 
         private bool NotaExists(int id)
