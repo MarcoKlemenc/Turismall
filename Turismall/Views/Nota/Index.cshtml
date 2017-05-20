@@ -7,7 +7,7 @@
 <h2>Listado de notas</h2>
 
 <p>
-    <a asp-action="Create">Crear nota</a>
+    @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = Model.Select(x => x.ViajeID).FirstOrDefault() }, new { @class = "btn btn-default btn-sm" })
 </p>
 <table class="table">
     <thead>
