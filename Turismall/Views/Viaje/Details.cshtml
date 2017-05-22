@@ -6,8 +6,8 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <h2>Detalles</h2>
-
+    <img height="200" class="center-block" src="@Url.Content("~/DetallesDelViaje.png")" />
+    <br/>
     <div>
         <dl class="dl-horizontal">
             <dt>
@@ -28,8 +28,8 @@
                 {
                     @Html.DisplayFor(model => model.Descripcion)
                 }
-                @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default btn-sm pull-right" })
                 @Html.ActionLink("Ver notas", "Index", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default btn-sm pull-right" })
+                @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default btn-sm pull-right" })
             </dd>
 
         </dl>

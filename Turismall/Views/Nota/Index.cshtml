@@ -29,10 +29,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Texto)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Detalles</a>
-                </td>
+                <td class="col-md-2" style="text-align: right">
+                    <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil" /></a>
+                    <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-file" /></a>
+                  </td>
             </tr>
         }
     </tbody>
