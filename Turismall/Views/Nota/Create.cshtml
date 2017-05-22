@@ -27,16 +27,15 @@
         @Html.HiddenFor(m => m.ViajeID)
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-2">
+                <a asp-action="Index" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" /><font face="sans-serif"> Volver</font></a>
+            </div>
+            <div class="col-md-10">
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" /><font face="sans-serif"> Crear</font></button>
             </div>
         </div>
     </div>
 </form>
-
-<div>
-    <a asp-action="Index">Volver</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
