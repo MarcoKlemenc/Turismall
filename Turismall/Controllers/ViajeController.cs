@@ -7,22 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Turismall.Data;
 using Turismall.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Turismall.Controllers
 {
     public class ViajeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ViajeController(ApplicationDbContext context)
+        public ViajeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Viaje
         public IActionResult Index()
         {
-            return View(_context.Viaje.Where(x => x.Usuario == User.Identity.Name));
+            return View(_context.Viaje.Where(x => x.Usuario == _userManager.GetUserId(HttpContext.User)));
         }
 
         // GET: Viaje/Details/5
@@ -35,7 +38,7 @@ namespace Turismall.Controllers
 
             var viaje = _context.Viaje
                 .SingleOrDefault(m => m.ID == id);
-            if (viaje == null || viaje.Usuario != User.Identity.Name)
+            if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
             {
                 return NotFound();
             }
@@ -58,7 +61,7 @@ namespace Turismall.Controllers
         {
             if (ModelState.IsValid)
             {
-                viaje.Usuario = User.Identity.Name;
+                viaje.Usuario = _userManager.GetUserId(HttpContext.User);
                 _context.Add(viaje);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -75,7 +78,7 @@ namespace Turismall.Controllers
             }
 
             var viaje = _context.Viaje.SingleOrDefault(m => m.ID == id);
-            if (viaje == null || viaje.Usuario != User.Identity.Name)
+            if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
             {
                 return NotFound();
             }
