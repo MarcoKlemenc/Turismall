@@ -40,20 +40,27 @@ namespace Turismall.Controllers
                 return NotFound();
             }
 
-            var viaje = _context.Viaje
-                .SingleOrDefault(m => m.ID == id);
-            if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
+            if (User.Identity.IsAuthenticated)
             {
-                return NotFound();
-            }
+                var viaje = _context.Viaje.SingleOrDefault(m => m.ID == id);
+                if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
+                {
+                    return NotFound();
+                }
 
-            return View(viaje);
+                return View(viaje);
+            }
+            return Redirect("../../Account/Login");
         }
 
         // GET: Viaje/Create
         public IActionResult Create()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            return Redirect("../Account/Login");
         }
 
         // POST: Viaje/Create
@@ -80,13 +87,16 @@ namespace Turismall.Controllers
             {
                 return NotFound();
             }
-
-            var viaje = _context.Viaje.SingleOrDefault(m => m.ID == id);
-            if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
+            if (User.Identity.IsAuthenticated)
             {
-                return NotFound();
+                var viaje = _context.Viaje.SingleOrDefault(m => m.ID == id);
+                if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
+                {
+                    return NotFound();
+                }
+                return View(viaje);
             }
-            return View(viaje);
+            return Redirect("../../Account/Login");
         }
 
         // POST: Viaje/Edit/5
@@ -122,35 +132,6 @@ namespace Turismall.Controllers
                 return RedirectToAction("Index");
             }
             return View(viaje);
-        }
-
-        // GET: Viaje/Delete/5
-        public IActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var viaje = _context.Viaje
-                .SingleOrDefault(m => m.ID == id);
-            if (viaje == null)
-            {
-                return NotFound();
-            }
-
-            return View(viaje);
-        }
-
-        // POST: Viaje/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var viaje = _context.Viaje.SingleOrDefault(m => m.ID == id);
-            _context.Viaje.Remove(viaje);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         private bool ViajeExists(int id)
