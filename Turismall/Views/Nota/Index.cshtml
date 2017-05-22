@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Listado de notas</h2>
+<img height="200" class="center-block" src="@Url.Content("~/ListadoDeNotas.png")" />
 
 <p>
     @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = Model.Select(x => x.ViajeID).FirstOrDefault() }, new { @class = "btn btn-default btn-sm" })
@@ -31,8 +31,7 @@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Borrar</a>
+                    <a asp-action="Details" asp-route-id="@item.ID">Detalles</a>
                 </td>
             </tr>
         }
