@@ -21,9 +21,11 @@
     </dl>
     
     <form asp-action="Delete">
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" />
-            <a asp-action="Index">Volver</a>
+        <div class="col-md-10">
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon" /><font face="sans-serif"> Borrar</font></button>
         </div>
     </form>
+</div>
+<div>
+    @Html.ActionLink("Volver", "Index", new { Controller = "Nota", idViaje = Model.ViajeID }, new { @class = "btn btn-default btn-sm" })
 </div>
