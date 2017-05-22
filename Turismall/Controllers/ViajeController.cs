@@ -29,7 +29,7 @@ namespace Turismall.Controllers
             {
                 return View(_context.Viaje.Where(x => x.Usuario == _userManager.GetUserId(HttpContext.User)));
             }
-            return RedirectToAction("../Account/Login");
+            return Redirect("Account/Login");
         }
 
         // GET: Viaje/Details/5
