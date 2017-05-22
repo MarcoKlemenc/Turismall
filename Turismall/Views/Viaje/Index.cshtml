@@ -5,43 +5,35 @@
     ViewData["Title"] = "Index";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
-    <img height="200" class="center-block" src="@Url.Content("~/ListadoDeViajes.png")" />
+<img height="200" class="center-block" src="@Url.Content("~/ListadoDeViajes.png")" />
 
-    <table class="table table-hover">
-        @if (!Model.Any())
-        {
-            <tr><td><h4>No se han creado viajes.</h4></td></tr>
-        }
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td class="col-md-10">
-                    <h4>@Html.DisplayFor(modelItem => item.Nombre)</h4>
-                    @if (String.IsNullOrEmpty(item.Descripcion))
-                    {
-                        <h5>No hay descripcion.</h5>
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.Descripcion)
-                    }
+<table class="table table-hover">
+    @if (!Model.Any())
+    {
+        <tr><td><h4>No se han creado viajes.</h4></td></tr>
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-10">
+                <h4>@Html.DisplayFor(modelItem => item.Nombre)</h4>
+                @if (String.IsNullOrEmpty(item.Descripcion))
+                {
+                    <h5>No hay descripcion.</h5>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                }
 
-                </td>
-                <td class="col-md-2" style="text-align: right">
-                    <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil" /></a>
-                    <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-file" /></a>
-                    <a href="@Url.Action("Index", new { Controller = "Nota", idViaje = item.ID })" class="btn btn-default"><span class="glyphicon glyphicon-bookmark" /></a>
-                </td>
-            </tr>
-        }
-    </table>
+            </td>
+            <td class="col-md-2" style="text-align: right">
+                <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil" /></a>
+                <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-file" /></a>
+                <a href="@Url.Action("Index", new { Controller = "Nota", idViaje = item.ID })" class="btn btn-default"><span class="glyphicon glyphicon-bookmark" /></a>
+            </td>
+        </tr>
+    }
+</table>
 
-    <a asp-action="Create" class="btn btn-primary"><span class="glyphicon glyphicon-plus" /><font face="sans-serif"> Agregar</font></a>
-}
-else
-{
-    <h2>Acceso denegado</h2>
-    <h4>Para utilizar esta funcionalidad, debe ingresar primero.</h4>
-}
+<a asp-action="Create" class="btn btn-primary"><span class="glyphicon glyphicon-plus" /><font face="sans-serif"> Agregar</font></a>

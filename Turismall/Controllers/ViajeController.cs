@@ -25,7 +25,11 @@ namespace Turismall.Controllers
         // GET: Viaje
         public IActionResult Index()
         {
-            return View(_context.Viaje.Where(x => x.Usuario == _userManager.GetUserId(HttpContext.User)));
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(_context.Viaje.Where(x => x.Usuario == _userManager.GetUserId(HttpContext.User)));
+            }
+            return RedirectToAction("../Account/Login");
         }
 
         // GET: Viaje/Details/5
