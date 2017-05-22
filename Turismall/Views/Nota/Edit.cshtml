@@ -29,7 +29,7 @@
 </form>
 
 <div>
-    <a asp-action="Index">Volver</a>
+    @Html.ActionLink("Volver", "Index", new { Controller = "Nota", idViaje = Model.ViajeID }, new { @class = "btn btn-default btn-sm" })
 </div>
 
 @section Scripts {
