@@ -30,6 +30,7 @@ namespace Turismall.Controllers
             {
                 return NotFound();
             }
+            ViewBag.idViaje = idViaje;
             return View(_context.Nota.Where(x => x.ViajeID == idViaje));
         }
 

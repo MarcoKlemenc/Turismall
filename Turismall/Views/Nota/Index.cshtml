@@ -7,7 +7,7 @@
 <img height="200" class="center-block" src="@Url.Content("~/ListadoDeNotas.png")" />
 
 <p>
-    @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = Model.Select(x => x.ViajeID).FirstOrDefault() }, new { @class = "btn btn-default btn-sm" })
+    @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = @ViewBag.idViaje }, new { @class = "btn btn-default btn-sm" })
 </p>
 <table class="table">
     <thead>
@@ -20,7 +20,7 @@
     </thead>
     <tbody>
         @if (!Model.Any())
-            {
+        {
             <tr><td><h4>El viaje no posee notas.</h4></td></tr>
         }
         @foreach (var item in Model)
@@ -32,7 +32,7 @@
                 <td class="col-md-2" style="text-align: right">
                     <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil" /></a>
                     <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-file" /></a>
-                  </td>
+                </td>
             </tr>
         }
     </tbody>
