@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Turismall.Data;
 using Turismall.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Turismall.Controllers
 {
+    [Authorize]
     public class ViajeController : Controller
     {
         private readonly IViajeRepository _repository;
@@ -25,37 +27,24 @@ namespace Turismall.Controllers
         // GET: Viaje
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return View(_repository.GetViajesByUser(_userManager.GetUserId(HttpContext.User)));
-            }
-            return Redirect("Account/Login");
+            return View(_repository.GetViajesByUser(_userManager.GetUserId(HttpContext.User)));
         }
 
         // GET: Viaje/Details/5
         public IActionResult Details(int? id)
         {
-            if (User.Identity.IsAuthenticated)
+            var viaje = _repository.GetViajeByID(id);
+            if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
             {
-                var viaje = _repository.GetViajeByID(id);
-                if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
-                {
-                    return NotFound();
-                }
-
-                return View(viaje);
+                return NotFound();
             }
-            return Redirect("../../Account/Login");
+            return View(viaje);
         }
 
         // GET: Viaje/Create
         public IActionResult Create()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return View();
-            }
-            return Redirect("../Account/Login");
+            return View();
         }
 
         // POST: Viaje/Create
@@ -78,16 +67,12 @@ namespace Turismall.Controllers
         // GET: Viaje/Edit/5
         public IActionResult Edit(int? id)
         {
-            if (User.Identity.IsAuthenticated)
+            var viaje = _repository.GetViajeByID(id);
+            if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
             {
-                var viaje = _repository.GetViajeByID(id);
-                if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
-                {
-                    return NotFound();
-                }
-                return View(viaje);
+                return NotFound();
             }
-            return Redirect("../../Account/Login");
+            return View(viaje);
         }
 
         // POST: Viaje/Edit/5
