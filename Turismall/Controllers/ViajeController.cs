@@ -13,12 +13,12 @@ namespace Turismall.Controllers
 {
     public class ViajeController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IViajeRepository _repository;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ViajeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public ViajeController(IViajeRepository repository, UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+            _repository = repository;
             _userManager = userManager;
         }
 
@@ -27,7 +27,7 @@ namespace Turismall.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return View(_context.Viaje.Where(x => x.Usuario == _userManager.GetUserId(HttpContext.User)));
+                return View(_repository.GetViajesByUser(_userManager.GetUserId(HttpContext.User)));
             }
             return Redirect("Account/Login");
         }
@@ -35,14 +35,9 @@ namespace Turismall.Controllers
         // GET: Viaje/Details/5
         public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             if (User.Identity.IsAuthenticated)
             {
-                var viaje = _context.Viaje.SingleOrDefault(m => m.ID == id);
+                var viaje = _repository.GetViajeByID(id);
                 if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
                 {
                     return NotFound();
@@ -73,8 +68,8 @@ namespace Turismall.Controllers
             if (ModelState.IsValid)
             {
                 viaje.Usuario = _userManager.GetUserId(HttpContext.User);
-                _context.Add(viaje);
-                _context.SaveChanges();
+                _repository.InsertViaje(viaje);
+                _repository.Save();
                 return RedirectToAction("Index");
             }
             return View(viaje);
@@ -83,13 +78,9 @@ namespace Turismall.Controllers
         // GET: Viaje/Edit/5
         public IActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
             if (User.Identity.IsAuthenticated)
             {
-                var viaje = _context.Viaje.SingleOrDefault(m => m.ID == id);
+                var viaje = _repository.GetViajeByID(id);
                 if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
                 {
                     return NotFound();
@@ -115,8 +106,8 @@ namespace Turismall.Controllers
             {
                 try
                 {
-                    _context.Update(viaje);
-                    _context.SaveChanges();
+                    _repository.UpdateViaje(viaje);
+                    _repository.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -136,7 +127,7 @@ namespace Turismall.Controllers
 
         private bool ViajeExists(int id)
         {
-            return _context.Viaje.Any(e => e.ID == id);
+            return _repository.GetViajeByID(id) != null;
         }
     }
 }
