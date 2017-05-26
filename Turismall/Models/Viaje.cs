@@ -17,6 +17,7 @@ namespace Turismall.Models
         public string Descripcion { get; set; }
         public List<Nota> Notas { get; set; }
         [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Debe ingresarse la fecha correspondiente al viaje")]
         public DateTime Fecha { get; set; }
 
     }

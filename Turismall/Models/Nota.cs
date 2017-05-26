@@ -16,6 +16,7 @@ namespace Turismall.Models
 
         public string Foto { get; set; }
         [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Debe ingresarse la fecha correspondiente a la nota")]
         public DateTime Fecha { get; set; }
     }
 }
