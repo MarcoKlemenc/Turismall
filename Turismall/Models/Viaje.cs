@@ -16,6 +16,8 @@ namespace Turismall.Models
         [DisplayName("Descripción")]
         public string Descripcion { get; set; }
         public List<Nota> Notas { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Fecha { get; set; }
 
     }
 }
