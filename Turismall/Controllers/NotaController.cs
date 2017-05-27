@@ -27,10 +27,11 @@ namespace Turismall.Controllers
         public IActionResult Index(int? idViaje, string nombreViaje)
         {
             var notas = _repository.GetNotasByViaje(idViaje);
+            if (notas == null)
             {
                 return NotFound();
             }
-            ViewBag.viaje = _context.Viaje.SingleOrDefault(x => x.ID == idViaje).Nombre;
+            ViewBag.viaje = nombreViaje;
             ViewBag.idViaje = idViaje;
             return View(notas);
         }
