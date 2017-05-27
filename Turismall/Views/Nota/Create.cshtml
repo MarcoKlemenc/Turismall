@@ -32,15 +32,16 @@
         @Html.HiddenFor(m => m.ViajeID)
 
         <div class="form-group">
-            <div class="col-md-2">
-                <a asp-action="Index" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" /><font face="sans-serif"> Volver</font></a>
-            </div>
             <div class="col-md-10">
                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" /><font face="sans-serif"> Crear</font></button>
             </div>
         </div>
     </div>
 </form>
+
+<div>
+    @Html.ActionLink("Volver", "Index", new { Controller = "Nota", idViaje = Model.ViajeID }, new { @class = "btn btn-default btn-sm" })
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
