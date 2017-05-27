@@ -14,42 +14,35 @@ namespace Turismall.Controllers
 {
     public class NotaController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly INotaRepository _repository;
         private IHostingEnvironment _env;
 
-        public NotaController(ApplicationDbContext context, IHostingEnvironment env)
+        public NotaController(INotaRepository repository, IHostingEnvironment env)
         {
-            _context = context;
+            _repository = repository;
             _env = env;
         }
 
         // GET: Nota
-        public IActionResult Index(int? idViaje)
+        public IActionResult Index(int? idViaje, string nombreViaje)
         {
-            if (idViaje == null)
+            var notas = _repository.GetNotasByViaje(idViaje);
             {
                 return NotFound();
             }
             ViewBag.viaje = _context.Viaje.SingleOrDefault(x => x.ID == idViaje).Nombre;
             ViewBag.idViaje = idViaje;
-            return View(_context.Nota.Where(x => x.ViajeID == idViaje).OrderByDescending(x => x.Fecha));
+            return View(notas);
         }
 
         // GET: Nota/Details/5
         public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var nota = _context.Nota
-                .SingleOrDefault(m => m.ID == id);
+            var nota = _repository.GetNotaByID(id);
             if (nota == null)
             {
                 return NotFound();
             }
-
             return View(nota);
         }
 
@@ -91,8 +84,8 @@ namespace Turismall.Controllers
                         }
                     }
                 }
-                _context.Add(nota);
-                _context.SaveChanges();
+                _repository.InsertNota(nota);
+                _repository.Save();
                 return RedirectToAction("Index", new { idViaje = nota.ViajeID });
             }
             return View(nota);
@@ -101,12 +94,7 @@ namespace Turismall.Controllers
         // GET: Nota/Edit/5
         public IActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var nota = _context.Nota.SingleOrDefault(m => m.ID == id);
+            var nota = _repository.GetNotaByID(id);
             if (nota == null)
             {
                 return NotFound();
@@ -130,8 +118,8 @@ namespace Turismall.Controllers
             {
                 try
                 {
-                    _context.Update(nota);
-                    _context.SaveChanges();
+                    _repository.UpdateNota(nota);
+                    _repository.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -152,35 +140,17 @@ namespace Turismall.Controllers
         // GET: Nota/Delete/5
         public IActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var nota = _context.Nota
-                .SingleOrDefault(m => m.ID == id);
+            var nota = _repository.GetNotaByID(id);
             if (nota == null)
             {
                 return NotFound();
             }
-
             return View(nota);
-        }
-
-        // POST: Nota/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var nota = _context.Nota.SingleOrDefault(m => m.ID == id);
-            _context.Nota.Remove(nota);
-            _context.SaveChanges();
-            return RedirectToAction("Index", new { idViaje = nota.ViajeID });
         }
 
         private bool NotaExists(int id)
         {
-            return _context.Nota.Any(e => e.ID == id);
+            return _repository.GetNotaByID(id) != null;
         }
     }
 }
