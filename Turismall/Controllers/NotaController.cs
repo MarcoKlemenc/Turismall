@@ -32,7 +32,7 @@ namespace Turismall.Controllers
             }
             ViewBag.viaje = _context.Viaje.SingleOrDefault(x => x.ID == idViaje).Nombre;
             ViewBag.idViaje = idViaje;
-            return View(_context.Nota.Where(x => x.ViajeID == idViaje));
+            return View(_context.Nota.Where(x => x.ViajeID == idViaje).OrderByDescending(x => x.Fecha));
         }
 
         // GET: Nota/Details/5
