@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using Turismall.Models;
 
 namespace Turismall.Services
@@ -10,5 +11,6 @@ namespace Turismall.Services
         void Create(Nota nota);
         void Update(Nota nota);
         void Save();
+        void UploadFile(Nota nota, IFormFileCollection files);
     }
 }

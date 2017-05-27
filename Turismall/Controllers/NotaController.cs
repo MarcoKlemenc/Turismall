@@ -1,13 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Turismall.Models;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
 using Turismall.Services;
 
 namespace Turismall.Controllers
@@ -15,12 +8,10 @@ namespace Turismall.Controllers
     public class NotaController : Controller
     {
         private readonly INotaService _service;
-        private IHostingEnvironment _env;
-
-        public NotaController(INotaService service, IHostingEnvironment env)
+        
+        public NotaController(INotaService service)
         {
             _service = service;
-            _env = env;
         }
 
         // GET: Nota
@@ -66,25 +57,7 @@ namespace Turismall.Controllers
         {
             if (ModelState.IsValid)
             {
-                var files = HttpContext.Request.Form.Files;
-                var folder = Path.Combine("uploads", nota.ViajeID.ToString());
-                var destination = Path.Combine(_env.WebRootPath, folder);
-                foreach (var file in files)
-                {
-                    if (file.Length > 0)
-                    {
-                        if (!Directory.Exists(destination))
-                        {
-                            Directory.CreateDirectory(destination);
-                        }
-                        var name = DateTime.Now.ToString("yyyyMMddHHmmssffff")+".jpg";
-                        using (var fileStream = new FileStream(Path.Combine(destination, name), FileMode.Create))
-                        {
-                            file.CopyTo(fileStream);
-                            nota.Foto = Path.Combine(folder, name);
-                        }
-                    }
-                }
+                _service.UploadFile(nota, HttpContext.Request.Form.Files);
                 _service.Create(nota);
                 _service.Save();
                 return RedirectToAction("Index", new { idViaje = nota.ViajeID });
