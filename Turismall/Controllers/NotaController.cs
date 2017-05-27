@@ -81,13 +81,8 @@ namespace Turismall.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Nota nota)
+        public IActionResult Edit(Nota nota)
         {
-            if (id != nota.ID)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
@@ -97,34 +92,12 @@ namespace Turismall.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NotaExists(nota.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction("Index", new { idViaje = nota.ViajeID });
             }
             return View(nota);
         }
 
-        // GET: Nota/Delete/5
-        public IActionResult Delete(int? id)
-        {
-            var nota = _service.GetById(id);
-            if (nota == null)
-            {
-                return NotFound();
-            }
-            return View(nota);
-        }
-
-        private bool NotaExists(int id)
-        {
-            return _service.GetById(id) != null;
-        }
     }
 }
