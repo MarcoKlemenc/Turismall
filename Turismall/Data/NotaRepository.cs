@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Turismall.Models;
 
 namespace Turismall.Data
@@ -15,36 +16,22 @@ namespace Turismall.Data
             _context = context;
         }
 
-        public IEnumerable<Nota> GetNotasByViaje(int? ViajeId)
+        public IEnumerable<Nota> GetSeveralByPredicate(Expression<Func<Nota, bool>> predicate)
         {
-            if (ViajeId == null)
-            {
-                return null;
-            }
-            return _context.Nota.Where(x => x.ViajeID == ViajeId).OrderByDescending(x => x.Fecha);
+            return _context.Nota.Where(predicate.Compile()).OrderByDescending(x => x.Fecha);
         }
 
-        public Nota GetNotaByID(int? NotaId)
+        public Nota GetByPredicate(Expression<Func<Nota, bool>> predicate)
         {
-            if (NotaId == null)
-            {
-                return null;
-            }
-            return _context.Nota.SingleOrDefault(m => m.ID == NotaId);
+            return _context.Nota.FirstOrDefault(predicate.Compile());
         }
 
-        public void InsertNota(Nota Nota)
+        public void Insert(Nota nota)
         {
-            _context.Nota.Add(Nota);
+            _context.Nota.Add(nota);
         }
 
-        public void DeleteNota(int NotaID)
-        {
-            Nota Nota = _context.Nota.Find(NotaID);
-            _context.Nota.Remove(Nota);
-        }
-
-        public void UpdateNota(Nota Nota)
+        public void Update(Nota Nota)
         {
             _context.Entry(Nota).State = EntityState.Modified;
         }

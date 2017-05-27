@@ -43,6 +43,8 @@ namespace Turismall
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<INotaService, NotaService>();
+
             services.AddScoped<IViajeRepository, ViajeRepository>();
             services.AddScoped<INotaRepository, NotaRepository>();
 

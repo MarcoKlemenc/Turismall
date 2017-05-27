@@ -5,28 +5,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Turismall.Data;
 using Turismall.Models;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Turismall.Services;
 
 namespace Turismall.Controllers
 {
     public class NotaController : Controller
     {
-        private readonly INotaRepository _repository;
+        private readonly INotaService _service;
         private IHostingEnvironment _env;
 
-        public NotaController(INotaRepository repository, IHostingEnvironment env)
+        public NotaController(INotaService service, IHostingEnvironment env)
         {
-            _repository = repository;
+            _service = service;
             _env = env;
         }
 
         // GET: Nota
         public IActionResult Index(int? idViaje, string nombreViaje)
         {
-            var notas = _repository.GetNotasByViaje(idViaje);
+            var notas = _service.GetByViaje(idViaje);
             if (notas == null)
             {
                 return NotFound();
@@ -39,7 +39,7 @@ namespace Turismall.Controllers
         // GET: Nota/Details/5
         public IActionResult Details(int? id)
         {
-            var nota = _repository.GetNotaByID(id);
+            var nota = _service.GetById(id);
             if (nota == null)
             {
                 return NotFound();
@@ -85,8 +85,8 @@ namespace Turismall.Controllers
                         }
                     }
                 }
-                _repository.InsertNota(nota);
-                _repository.Save();
+                _service.Create(nota);
+                _service.Save();
                 return RedirectToAction("Index", new { idViaje = nota.ViajeID });
             }
             return View(nota);
@@ -95,7 +95,7 @@ namespace Turismall.Controllers
         // GET: Nota/Edit/5
         public IActionResult Edit(int? id)
         {
-            var nota = _repository.GetNotaByID(id);
+            var nota = _service.GetById(id);
             if (nota == null)
             {
                 return NotFound();
@@ -119,8 +119,8 @@ namespace Turismall.Controllers
             {
                 try
                 {
-                    _repository.UpdateNota(nota);
-                    _repository.Save();
+                    _service.Update(nota);
+                    _service.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -141,7 +141,7 @@ namespace Turismall.Controllers
         // GET: Nota/Delete/5
         public IActionResult Delete(int? id)
         {
-            var nota = _repository.GetNotaByID(id);
+            var nota = _service.GetById(id);
             if (nota == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace Turismall.Controllers
 
         private bool NotaExists(int id)
         {
-            return _repository.GetNotaByID(id) != null;
+            return _service.GetById(id) != null;
         }
     }
 }
