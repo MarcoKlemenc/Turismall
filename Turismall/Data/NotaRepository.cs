@@ -16,9 +16,9 @@ namespace Turismall.Data
             _context = context;
         }
 
-        public IEnumerable<Nota> GetSeveralByPredicate(Expression<Func<Nota, bool>> predicate)
+        public List<Nota> GetSeveralByPredicate(Expression<Func<Nota, bool>> predicate)
         {
-            return _context.Nota.Where(predicate.Compile()).OrderByDescending(x => x.Fecha);
+            return _context.Nota.Where(predicate.Compile()).OrderByDescending(x => x.Fecha).ToList();
         }
 
         public Nota GetByPredicate(Expression<Func<Nota, bool>> predicate)

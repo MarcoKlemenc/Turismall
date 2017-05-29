@@ -4,53 +4,40 @@
     ViewData["Title"] = "Editar";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
-    <h2>Editar</h2>
+<h2>Editar</h2>
 
-    <form asp-action="Edit">
-        <div class="form-horizontal">
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
-            <input type="hidden" asp-for="Usuario" />
-            <div class="form-group">
-                <label asp-for="Nombre" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Nombre" class="form-control" />
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Descripcion" class="form-control" />
-                    <span asp-validation-for="Descripcion" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Fecha" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Fecha" class="form-control" />
-                    <span asp-validation-for="Fecha" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-2">
-                    <a asp-action="Index" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" /><font face="sans-serif"> Volver </font></a>
-                </div>
-                <div class="col-md-10">
-                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" /><font face="sans-serif"> Guardar</font></button>
-                </div>
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ID" />
+        <input type="hidden" asp-for="Usuario" />
+        <input type="hidden" asp-for="FechaInicio" />
+        <input type="hidden" asp-for="FechaFin" />
+        <div class="form-group">
+            <label asp-for="Nombre" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
         </div>
-    </form>
-}
-else
-{
-    <h2>Acceso denegado</h2>
-    <h4>Para utilizar esta funcionalidad, debe ingresar primero.</h4>
-}
+        <div class="form-group">
+            <label asp-for="Descripcion" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <a asp-action="Index" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" /><font face="sans-serif"> Volver </font></a>
+            </div>
+            <div class="col-md-10">
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" /><font face="sans-serif"> Guardar</font></button>
+            </div>
+        </div>
+    </div>
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

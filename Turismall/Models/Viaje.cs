@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Turismall.Models
 {
@@ -17,8 +15,9 @@ namespace Turismall.Models
         public string Descripcion { get; set; }
         public List<Nota> Notas { get; set; }
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "Debe ingresarse la fecha correspondiente al viaje")]
-        public DateTime Fecha { get; set; }
+        public DateTime FechaInicio { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime FechaFin { get; set; }
 
     }
 }

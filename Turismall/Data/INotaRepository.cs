@@ -7,7 +7,7 @@ namespace Turismall.Data
 {
     public interface INotaRepository : IDisposable
     {
-        IEnumerable<Nota> GetSeveralByPredicate(Expression<Func<Nota, bool>> predicate);
+        List<Nota> GetSeveralByPredicate(Expression<Func<Nota, bool>> predicate);
         Nota GetByPredicate(Expression<Func<Nota, bool>> predicate);
         void Insert(Nota nota);
         void Update(Nota nota);

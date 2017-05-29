@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using Turismall.Models;
 using Turismall.Services;
 
@@ -44,6 +45,7 @@ namespace Turismall.Controllers
             Nota nota = new Nota
             {
                 ViajeID = idViaje,
+                Fecha = DateTime.Today
             };
             return View(nota);
         }
@@ -60,6 +62,7 @@ namespace Turismall.Controllers
                 _service.UploadFile(nota, HttpContext.Request.Form.Files);
                 _service.Create(nota);
                 _service.Save();
+                _service.UpdateFechas(nota);
                 return RedirectToAction("Index", new { idViaje = nota.ViajeID });
             }
             return View(nota);
@@ -89,6 +92,7 @@ namespace Turismall.Controllers
                 {
                     _service.Update(nota);
                     _service.Save();
+                    _service.UpdateFechas(nota);
                 }
                 catch (DbUpdateConcurrencyException)
                 {

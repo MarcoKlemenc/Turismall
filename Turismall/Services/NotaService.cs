@@ -11,15 +11,17 @@ namespace Turismall.Services
     public class NotaService : INotaService
     {
         private readonly INotaRepository _repository;
+        private readonly IViajeRepository _viajeRepository;
         private IHostingEnvironment _env;
 
-        public NotaService(INotaRepository repository, IHostingEnvironment env)
+        public NotaService(INotaRepository repository, IViajeRepository viajeRepository, IHostingEnvironment env)
         {
             _repository = repository;
+            _viajeRepository = viajeRepository;
             _env = env;
         }
 
-        public IEnumerable<Nota> GetByViaje(int? viajeId)
+        public List<Nota> GetByViaje(int? viajeId)
         {
             if (viajeId == null)
             {
@@ -37,6 +39,18 @@ namespace Turismall.Services
             return _repository.GetByPredicate(x => x.ID == notaId);
         }
 
+        public DateTime GetMinFecha(int? viajeId)
+        {
+            List<Nota> notas = GetByViaje(viajeId);
+            return notas[notas.Count - 1].Fecha;
+        }
+
+        public DateTime GetMaxFecha(int? viajeId)
+        {
+            List<Nota> notas = GetByViaje(viajeId);
+            return notas[0].Fecha;
+        }
+
         public void Create(Nota nota)
         {
             _repository.Insert(nota);
@@ -50,6 +64,15 @@ namespace Turismall.Services
         public void Save()
         {
             _repository.Save();
+        }
+
+        public void UpdateFechas(Nota nota)
+        {
+            var viaje = _viajeRepository.GetViajeByID(nota.ViajeID);
+            viaje.FechaInicio = GetMinFecha(viaje.ID);
+            viaje.FechaFin = GetMaxFecha(viaje.ID);
+            _viajeRepository.UpdateViaje(viaje);
+            _viajeRepository.Save();
         }
 
         public void UploadFile(Nota nota, IFormFileCollection files)

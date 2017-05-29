@@ -16,6 +16,7 @@
     {
         <tr>
             <td class="col-md-10">
+                <small>@Html.DisplayFor(modelItem => item.FechaInicio) - @Html.DisplayFor(modelItem => item.FechaFin)</small>
                 <h4>@Html.DisplayFor(modelItem => item.Nombre)</h4>
                 @if (String.IsNullOrEmpty(item.Descripcion))
                 {
