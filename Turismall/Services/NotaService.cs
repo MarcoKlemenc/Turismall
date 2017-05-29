@@ -66,6 +66,11 @@ namespace Turismall.Services
             _repository.Save();
         }
 
+        public string GetViajeName(int? idViaje)
+        {
+            return _viajeRepository.GetViajeByID(idViaje).Nombre;
+        }
+
         public void UpdateFechas(Nota nota)
         {
             var viaje = _viajeRepository.GetViajeByID(nota.ViajeID);

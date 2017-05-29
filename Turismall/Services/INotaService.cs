@@ -14,6 +14,7 @@ namespace Turismall.Services
         void Create(Nota nota);
         void Update(Nota nota);
         void Save();
+        string GetViajeName(int? idViaje);
         void UpdateFechas(Nota nota);
         void UploadFile(Nota nota, IFormFileCollection files);
     }

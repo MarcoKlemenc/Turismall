@@ -16,14 +16,14 @@ namespace Turismall.Controllers
         }
 
         // GET: Nota
-        public IActionResult Index(int? idViaje, string nombreViaje)
+        public IActionResult Index(int? idViaje)
         {
             var notas = _service.GetByViaje(idViaje);
             if (notas == null)
             {
                 return NotFound();
             }
-            ViewBag.viaje = nombreViaje;
+            ViewBag.viaje = _service.GetViajeName(idViaje);
             ViewBag.idViaje = idViaje;
             return View(notas);
         }

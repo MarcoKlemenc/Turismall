@@ -31,7 +31,7 @@
             <td class="col-md-2" style="text-align: right">
                 <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil" /></a>
                 <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-file" /></a>
-                <a href="@Url.Action("Index", new { Controller = "Nota", idViaje = item.ID, nombreViaje = item.Nombre })" class="btn btn-default"><span class="glyphicon glyphicon-bookmark" /></a>
+                <a href="@Url.Action("Index", new { Controller = "Nota", idViaje = item.ID })" class="btn btn-default"><span class="glyphicon glyphicon-bookmark" /></a>
             </td>
         </tr>
     }
