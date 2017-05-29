@@ -6,6 +6,7 @@ namespace Turismall.Models
     public class Nota
     {
         public int ID { get; set; }
+        [Required(ErrorMessage = "Debe ingresarse texto correspondiente a la nota")]
         public string Texto { get; set; }
 
         public int ViajeID { get; set; }
