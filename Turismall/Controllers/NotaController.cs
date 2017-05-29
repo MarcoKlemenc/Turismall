@@ -90,6 +90,7 @@ namespace Turismall.Controllers
             {
                 try
                 {
+                    _service.UploadFile(nota, HttpContext.Request.Form.Files);
                     _service.Update(nota);
                     _service.Save();
                     _service.UpdateFechas(nota);
