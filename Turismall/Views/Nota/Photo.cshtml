@@ -1,0 +1,37 @@
+@model Turismall.Models.Nota
+
+@{
+    ViewData["Title"] = "Subir foto";
+}
+
+<h2>Subir foto</h2>
+
+<form asp-action="Photo" method="post" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ID" />
+        <input type="hidden" asp-for="ViajeID" />
+        <input type="hidden" asp-for="Fecha" />
+        <input type="hidden" asp-for="Texto" />
+        <div class="form-group">
+            <label asp-for="Foto" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input class="form-control" type="file" name="Foto" accept="image/jpeg" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Subir" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    @Html.ActionLink("Volver", "Index", new { Controller = "Nota", idViaje = Model.ViajeID }, new { @class = "btn btn-default btn-sm" })
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

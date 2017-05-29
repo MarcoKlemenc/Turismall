@@ -104,5 +104,39 @@ namespace Turismall.Controllers
             return View(nota);
         }
 
+        // GET: Nota/Edit/5
+        public IActionResult Photo(int? id)
+        {
+            var nota = _service.GetById(id);
+            if (nota == null)
+            {
+                return NotFound();
+            }
+            return View(nota);
+        }
+
+        // POST: Nota/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Photo(Nota nota)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _service.UploadFile(nota, HttpContext.Request.Form.Files);
+                    _service.Update(nota);
+                    _service.Save();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction("Index", new { idViaje = nota.ViajeID });
+            }
+            return View(nota);
+        }
     }
 }
