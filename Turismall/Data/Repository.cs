@@ -20,7 +20,7 @@ namespace Turismall.Data
             return _context.Set<T>().Where(predicate).ToList();
         }
 
-        public List<T> GetSorted(Expression<Func<T, bool>> predicate, Expression<Func<T, bool>> order)
+        public List<T> GetSorted(Expression<Func<T, bool>> predicate, Expression<Func<T, Object>> order)
         {
             return _context.Set<T>().Where(predicate).OrderByDescending(order).ToList();
         }

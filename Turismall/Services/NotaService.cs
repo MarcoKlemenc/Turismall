@@ -23,7 +23,7 @@ namespace Turismall.Services
 
         public List<Nota> GetByViaje(int? viajeId)
         {
-            return viajeId == null ? null : _repository.GetMany(x => x.ViajeID == viajeId);
+            return viajeId == null ? null : _repository.GetSorted(x => x.ViajeID == viajeId, x => x.Fecha);
         }
 
         public Nota GetById(int? notaId)
