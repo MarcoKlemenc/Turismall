@@ -25,7 +25,7 @@ namespace Turismall.Services
 
         public List<Viaje> GetByUser(string userId)
         {
-            return _repository.GetMany(x => x.Usuario == userId);
+            return _repository.GetSorted(x => x.Usuario == userId, x => x.FechaInicio);
         }
 
         public void Save()
