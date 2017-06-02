@@ -6,6 +6,9 @@
 }
 
 <img height="200" class="center-block" src="@Url.Content("~/ListaViajes.png")" />
+<br />
+<div style="text-align:center"><a asp-action="Create" class="btn btn-primary"><span class="glyphicon glyphicon-plus" /><font face="sans-serif"> Agregar</font></a></div>
+<br />
 
 <table class="table table-hover">
     @if (!Model.Any())
@@ -16,7 +19,18 @@
     {
         <tr>
             <td class="col-md-10">
-                <small>@Html.DisplayFor(modelItem => item.FechaInicio) - @Html.DisplayFor(modelItem => item.FechaFin)</small>
+
+                @if (item.FechaInicio.Year != 1)
+                {
+                    <small>
+                        @Html.DisplayFor(modelItem => item.FechaInicio) - @Html.DisplayFor(modelItem => item.FechaFin)
+                    </small>
+                }
+                else
+                {
+                    <small title="Debe agregar una nota para definir las fechas del viaje">Sin fechas</small>
+                }
+
                 <h4>@Html.DisplayFor(modelItem => item.Nombre)</h4>
                 @if (String.IsNullOrEmpty(item.Descripcion))
                 {
@@ -36,5 +50,3 @@
         </tr>
     }
 </table>
-
-<a asp-action="Create" class="btn btn-primary"><span class="glyphicon glyphicon-plus" /><font face="sans-serif"> Agregar</font></a>

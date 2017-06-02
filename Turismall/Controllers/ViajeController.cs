@@ -39,7 +39,11 @@ namespace Turismall.Controllers
         // GET: Viaje/Create
         public IActionResult Create()
         {
-            return View();
+            Viaje viaje = new Viaje
+            {
+                Nombre = "Viaje sin nombre"
+            };
+            return View(viaje);
         }
 
         // POST: Viaje/Create
