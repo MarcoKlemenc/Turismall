@@ -1,34 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Turismall.Data;
 using Turismall.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Turismall.Services;
 
 namespace Turismall.Controllers
 {
     [Authorize]
     public class ViajeController : Controller
     {
-        private readonly IViajeRepository _repository;
+        private readonly IViajeService _service;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ViajeController(IViajeRepository repository, UserManager<ApplicationUser> userManager)
+        public ViajeController(IViajeService service, UserManager<ApplicationUser> userManager)
         {
-            _repository = repository;
+            _service = service;
             _userManager = userManager;
         }
 
         // GET: Viaje
         public IActionResult Index()
         {
-            return View(_repository.GetViajesByUser(_userManager.GetUserId(HttpContext.User)));
+            return View(_service.GetByUser(_userManager.GetUserId(HttpContext.User)));
         }
 
         // GET: Viaje/Details/5
         public IActionResult Details(int? id)
         {
-            var viaje = _repository.GetViajeByID(id);
+            var viaje = _service.GetById(id);
             if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
             {
                 return NotFound();
@@ -56,8 +56,8 @@ namespace Turismall.Controllers
             if (ModelState.IsValid)
             {
                 viaje.Usuario = _userManager.GetUserId(HttpContext.User);
-                _repository.InsertViaje(viaje);
-                _repository.Save();
+                _service.Create(viaje);
+                _service.Save();
                 return RedirectToAction("Index");
             }
             return View(viaje);
@@ -66,7 +66,7 @@ namespace Turismall.Controllers
         // GET: Viaje/Edit/5
         public IActionResult Edit(int? id)
         {
-            var viaje = _repository.GetViajeByID(id);
+            var viaje = _service.GetById(id);
             if (viaje == null || viaje.Usuario != _userManager.GetUserId(HttpContext.User))
             {
                 return NotFound();
@@ -90,8 +90,8 @@ namespace Turismall.Controllers
             {
                 try
                 {
-                    _repository.UpdateViaje(viaje);
-                    _repository.Save();
+                    _service.Update(viaje);
+                    _service.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -111,7 +111,7 @@ namespace Turismall.Controllers
 
         private bool ViajeExists(int id)
         {
-            return _repository.GetViajeByID(id) != null;
+            return _service.GetById(id) != null;
         }
     }
 }

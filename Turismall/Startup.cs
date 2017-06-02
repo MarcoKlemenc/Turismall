@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -44,9 +40,10 @@ namespace Turismall
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<INotaService, NotaService>();
+            services.AddScoped<IViajeService, ViajeService>();
 
-            services.AddScoped<IViajeRepository, ViajeRepository>();
-            services.AddScoped<INotaRepository, NotaRepository>();
+            services.AddScoped<IRepository<Nota>, Repository<Nota>>();
+            services.AddScoped<IRepository<Viaje>, Repository<Viaje>>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,6 +7,7 @@ using Turismall.Services;
 
 namespace Turismall.Controllers
 {
+    [Authorize]
     public class NotaController : Controller
     {
         private readonly INotaService _service;

@@ -10,11 +10,11 @@ namespace Turismall.Services
 {
     public class NotaService : INotaService
     {
-        private readonly INotaRepository _repository;
-        private readonly IViajeRepository _viajeRepository;
+        private readonly IRepository<Nota> _repository;
+        private readonly IRepository<Viaje> _viajeRepository;
         private IHostingEnvironment _env;
 
-        public NotaService(INotaRepository repository, IViajeRepository viajeRepository, IHostingEnvironment env)
+        public NotaService(IRepository<Nota> repository, IRepository<Viaje> viajeRepository, IHostingEnvironment env)
         {
             _repository = repository;
             _viajeRepository = viajeRepository;
@@ -23,20 +23,12 @@ namespace Turismall.Services
 
         public List<Nota> GetByViaje(int? viajeId)
         {
-            if (viajeId == null)
-            {
-                return null;
-            }
-            return _repository.GetSeveralByPredicate(x => x.ViajeID == viajeId);
+            return viajeId == null ? null : _repository.GetMany(x => x.ViajeID == viajeId);
         }
 
         public Nota GetById(int? notaId)
         {
-            if (notaId == null)
-            {
-                return null;
-            }
-            return _repository.GetByPredicate(x => x.ID == notaId);
+            return notaId == null ? null : _repository.GetOne(x => x.ID == notaId);
         }
 
         public DateTime GetMinFecha(int? viajeId)
@@ -68,15 +60,15 @@ namespace Turismall.Services
 
         public string GetViajeName(int? idViaje)
         {
-            return _viajeRepository.GetViajeByID(idViaje).Nombre;
+            return idViaje == null ? null : _viajeRepository.GetOne(x => x.ID == idViaje).Nombre;
         }
 
         public void UpdateFechas(Nota nota)
         {
-            var viaje = _viajeRepository.GetViajeByID(nota.ViajeID);
+            var viaje = _viajeRepository.GetOne(x => x.ID == nota.ViajeID);
             viaje.FechaInicio = GetMinFecha(viaje.ID);
             viaje.FechaFin = GetMaxFecha(viaje.ID);
-            _viajeRepository.UpdateViaje(viaje);
+            _viajeRepository.Update(viaje);
             _viajeRepository.Save();
         }
 
