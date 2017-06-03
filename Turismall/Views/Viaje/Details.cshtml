@@ -6,18 +6,26 @@
 
 <img height="200" class="center-block" src="@Url.Content("~/DetallesDelViaje.png")" />
 <br />
-<div>
-    <h4>@Html.DisplayFor(model => model.Nombre)</h4>
-    @if (String.IsNullOrEmpty(@Model.Descripcion))
+<div class="btn-group-justified">
+    <div class="col-md-9">
+        <h4>@Html.DisplayFor(model => model.Nombre)</h4>
+        @if (String.IsNullOrEmpty(@Model.Descripcion))
         {
             <p>No hay descripción.</p>
-    }
-    else
-    {
-        <p>@Html.DisplayFor(model => model.Descripcion)</p>
-    }
-    @Html.ActionLink("Ver notas", "Index", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default btn-sm pull-right" })
-    @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default btn-sm pull-right" })
+        }
+        else
+        {
+            <p>@Html.DisplayFor(model => model.Descripcion)</p>
+        }
+    </div>
+
+    <div class="col-md-3" style="text-align:right">
+        @Html.ActionLink("Ver notas", "Index", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Crear nota", "Create", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default" })
+    </div>
+</div>
+<br />
+<div class="btn-group-justified">
     <div class="col-md-2">
         <a asp-action="Index" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" /><font face="sans-serif"> Volver</font></a>
     </div>
