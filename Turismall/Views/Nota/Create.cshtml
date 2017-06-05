@@ -29,6 +29,7 @@
                 <input class="form-control" type="file" name="Foto" accept="image/jpeg" />
             </div>
         </div>
+        @Html.DropDownListFor(x => x.DestinoID, (IEnumerable<SelectListItem>)ViewBag.Destinos)
         @Html.HiddenFor(m => m.ViajeID)
 
         <div class="form-group">

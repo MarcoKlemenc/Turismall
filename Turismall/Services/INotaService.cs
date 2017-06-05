@@ -11,6 +11,7 @@ namespace Turismall.Services
         Nota GetById(int? notaId);
         DateTime GetMinFecha(int? viajeId);
         DateTime GetMaxFecha(int? viajeId);
+        List<Destino> GetDestinos();
         void Create(Nota nota);
         void Update(Nota nota);
         void Save();

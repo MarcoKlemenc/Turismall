@@ -12,12 +12,14 @@ namespace Turismall.Services
     {
         private readonly IRepository<Nota> _repository;
         private readonly IRepository<Viaje> _viajeRepository;
+        private readonly IRepository<Destino> _destinoRepository;
         private IHostingEnvironment _env;
 
-        public NotaService(IRepository<Nota> repository, IRepository<Viaje> viajeRepository, IHostingEnvironment env)
+        public NotaService(IRepository<Nota> repository, IRepository<Viaje> viajeRepository, IRepository<Destino> destinoRepository, IHostingEnvironment env)
         {
             _repository = repository;
             _viajeRepository = viajeRepository;
+            _destinoRepository = destinoRepository;
             _env = env;
         }
 
@@ -41,6 +43,11 @@ namespace Turismall.Services
         {
             List<Nota> notas = GetByViaje(viajeId);
             return notas[0].Fecha;
+        }
+
+        public List<Destino> GetDestinos()
+        {
+            return _destinoRepository.GetAll();
         }
 
         public void Create(Nota nota)
