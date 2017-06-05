@@ -16,9 +16,9 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td class="col-md-10"style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis ">
+            <td class="col-md-10">
                 <small>@Html.DisplayFor(modelItem => item.Fecha)</small>
-                <h4>@Html.DisplayFor(modelItem => item.Texto) </h4>
+                <h4 style="max-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis ">@Html.DisplayFor(modelItem => item.Texto) </h4>
             </td>
             <td class="col-md-2" style="text-align: right">
                 <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil" /></a>
