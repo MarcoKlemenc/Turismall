@@ -24,7 +24,7 @@
             @Html.DisplayNameFor(model => model.Destino)
         </dt>
         <dd>
-            @ViewBag.Destino
+            <a asp-controller="Destino" asp-action="Details" asp-route-id="@Model.DestinoID">@ViewBag.Destino</a>
         </dd>   
     </dl>
 </div>
