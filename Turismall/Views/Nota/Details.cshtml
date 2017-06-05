@@ -4,7 +4,12 @@
     ViewData["Title"] = "Details";
 }
 
-<img height="200" class="center-block" src="@Url.Content("~/DetallesDeLaNota.png")" />
+<div class="btn-group-justified">
+    <div>
+        <a href="@Url.Action("Index", new { Controller = "Nota", idViaje = Model.ViajeID })" class="btn btn-default" style="float:right; margin-top:20px"><span class="glyphicon glyphicon-remove" /></a>
+        <img height="200" class="center-block" src="@Url.Content("~/DetallesDeLaNota.png")" />
+    </div>
+</div>
 <br />
 <div>
     <dl class="dl-horizontal">
@@ -40,11 +45,4 @@
 }
 
 <br />
-<div>
-    <div class="col-md-10">
-        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil" /><font face="sans-serif"> Editar</font></a>
-    </div>
-</div>
-<div>
-    @Html.ActionLink("Volver", "Index", new { Controller = "Nota", idViaje = Model.ViajeID }, new { @class = "btn btn-default btn-sm" })
-</div>
+<a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil" /><font face="sans-serif"> Editar</font></a>

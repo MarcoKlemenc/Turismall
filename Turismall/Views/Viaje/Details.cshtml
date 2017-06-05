@@ -4,7 +4,12 @@
     ViewData["Title"] = "Detalles";
 }
 
-<img height="200" class="center-block" src="@Url.Content("~/DetallesDelViaje.png")" />
+<div class="btn-group-justified">
+    <div>
+        <a asp-action="Index" class="btn btn-default" style="float:right; margin-top:20px"><span class="glyphicon glyphicon-remove" /></a>
+        <img height="200" class="center-block" src="@Url.Content("~/DetallesDelViaje.png")" />
+    </div>
+</div>
 <br />
 <div class="btn-group-justified">
     <div class="col-md-9">
@@ -25,12 +30,5 @@
     </div>
 </div>
 <br />
-<div class="btn-group-justified">
-    <div class="col-md-2">
-        <a asp-action="Index" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" /><font face="sans-serif"> Volver</font></a>
-    </div>
-    <div class="col-md-10">
-        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil" /><font face="sans-serif"> Editar</font></a>
-    </div>    
-</div>
+<a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil" /><font face="sans-serif"> Editar</font></a>
 

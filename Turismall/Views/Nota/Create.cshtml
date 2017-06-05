@@ -4,47 +4,47 @@
     ViewData["Title"] = "Agregar";
 }
 
-<h2>Agregar nota</h2>
+<div class="btn-group-justified">
+    <h2>
+        Agregar nota
+        <a href="@Url.Action("Index", new { Controller = "Nota", idViaje = Model.ViajeID })" class="btn btn-default" style="float:right"><span class="glyphicon glyphicon-remove" /></a>
+    </h2>
+</div>
+
+<br />
 
 <form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="form-horizontal">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="Fecha" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <input asp-for="Fecha" class="form-control" />
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Texto" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <textarea asp-for="Texto" class="form-control"></textarea>
-                <span asp-validation-for="Texto" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Foto" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input class="form-control" type="file" name="Foto" accept="image/jpeg" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Destino" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <select asp-for="DestinoID" class="form-control" asp-items="@(new SelectList(@ViewBag.Destinos,"Value", "Text"))"></select>
                 <span asp-validation-for="Destino" class="text-danger"></span>
             </div>
         </div>
-        
+        <div class="form-group">
+            <div class="col-md-12">
+                <input class="form-control" type="file" name="Foto" accept="image/jpeg" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <textarea asp-for="Texto" class="form-control" placeholder="Escribe el texto de la nota"></textarea>
+                <span asp-validation-for="Texto" class="text-danger"></span>
+            </div>
+        </div>
+
         @Html.HiddenFor(m => m.ViajeID)
 
         <div class="form-group">
-            <div class="col-md-2">
-                @Html.ActionLink("Volver", "Index", new { Controller = "Nota", idViaje = Model.ViajeID }, new { @class = "btn btn-default btn-sm" })
-            </div>
-            <div class="col-md-10">
-                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saving"><span class="glyphicon glyphicon-floppy-disk" /><font face="sans-serif"> Agregar </font></button>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saving"><span class="glyphicon glyphicon-ok" /><font face="sans-serif"> Agregar </font></button>
                 <div id="saving" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
