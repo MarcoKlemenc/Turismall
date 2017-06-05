@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Crear nota</h2>
+<h2>Agregar nota</h2>
 
 <form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="form-horizontal">
@@ -33,7 +33,16 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk" /><font face="sans-serif"> Crear</font></button>
+                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saving"><span class="glyphicon glyphicon-floppy-disk" /><font face="sans-serif"> Agregar </font></button>
+                <div id="saving" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <p>Agregando...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
