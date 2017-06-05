@@ -29,7 +29,14 @@
                 <input class="form-control" type="file" name="Foto" accept="image/jpeg" />
             </div>
         </div>
-        @Html.DropDownListFor(x => x.DestinoID, (IEnumerable<SelectListItem>)ViewBag.Destinos)
+        <div class="form-group">
+            <label asp-for="Destino" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="DestinoID" class="form-control" asp-items="@(new SelectList(@ViewBag.Destinos,"Value", "Text"))"></select>
+                <span asp-validation-for="Destino" class="text-danger"></span>
+            </div>
+        </div>
+        
         @Html.HiddenFor(m => m.ViajeID)
 
         <div class="form-group">
