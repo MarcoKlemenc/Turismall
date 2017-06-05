@@ -15,6 +15,11 @@ namespace Turismall.Data
             _context = context;
         }
 
+        public List<T> GetAll()
+        {
+            return _context.Set<T>().ToList();
+        }
+
         public List<T> GetMany(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Where(predicate).ToList();

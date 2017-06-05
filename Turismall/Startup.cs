@@ -44,6 +44,7 @@ namespace Turismall
 
             services.AddScoped<IRepository<Nota>, Repository<Nota>>();
             services.AddScoped<IRepository<Viaje>, Repository<Viaje>>();
+            services.AddScoped<IRepository<Destino>, Repository<Destino>>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
