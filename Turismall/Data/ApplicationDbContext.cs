@@ -26,5 +26,7 @@ namespace Turismall.Data
         public DbSet<Turismall.Models.Viaje> Viaje { get; set; }
 
         public DbSet<Turismall.Models.Nota> Nota { get; set; }
+
+        public DbSet<Turismall.Models.Destino> Destino { get; set; }
     }
 }
