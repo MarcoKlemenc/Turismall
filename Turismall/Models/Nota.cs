@@ -12,6 +12,9 @@ namespace Turismall.Models
         public int ViajeID { get; set; }
         public virtual Viaje Viaje { get; set; }
 
+        public int DestinoID { get; set; }
+        public virtual Destino Destino { get; set; }
+
         public string Foto { get; set; }
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Debe ingresarse la fecha correspondiente a la nota")]
