@@ -1,36 +1,14 @@
 @model Turismall.Models.Destino
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalle";
 }
 
-<h2>Details</h2>
-
+<h2 style="text-align:center">@Html.DisplayFor(model => model.Nombre)</h2>
+<br />
 <div>
-    <h4>Destino</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FotoPortada)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FotoPortada)
-        </dd>
-    </dl>
+    <p>@Html.DisplayFor(model => model.Descripcion)</p>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-default"><span class="glyphicon glyphicon-backward" /></a>
 </div>

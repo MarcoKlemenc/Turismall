@@ -1,22 +1,20 @@
 @model IEnumerable<Turismall.Models.Destino>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Destinos";
 }
 
 <h2>Destinos</h2>
 
-<table class="table">
+<table class="table table-hover">
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-file" /></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <h4><a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Nombre)</a></h4>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
