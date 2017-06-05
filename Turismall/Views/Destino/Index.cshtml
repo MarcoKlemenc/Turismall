@@ -13,6 +13,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
+            <td>
+                <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-file" /></a>
+            </td>
         </tr>
 }
     </tbody>

@@ -41,6 +41,7 @@ namespace Turismall
 
             services.AddScoped<INotaService, NotaService>();
             services.AddScoped<IViajeService, ViajeService>();
+            services.AddScoped<IDestinoService, DestinoService>();
 
             services.AddScoped<IRepository<Nota>, Repository<Nota>>();
             services.AddScoped<IRepository<Viaje>, Repository<Viaje>>();

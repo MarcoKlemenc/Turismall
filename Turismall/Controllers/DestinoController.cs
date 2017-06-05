@@ -3,45 +3,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Turismall.Data;
+using Turismall.Services;
 
 namespace Turismall.Controllers
 {
     public class DestinoController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDestinoService _service;
 
-        public DestinoController(ApplicationDbContext context)
+        public DestinoController(IDestinoService service)
         {
-            _context = context;    
+            _service = service;    
         }
 
         // GET: Destino
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Destino.ToListAsync());
+            return View(_service.GetAll());
         }
 
         // GET: Destino/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var destino = await _context.Destino
-                .SingleOrDefaultAsync(m => m.ID == id);
+            var destino = _service.GetById(id);
             if (destino == null)
             {
                 return NotFound();
             }
-
             return View(destino);
-        }
-
-        private bool DestinoExists(int id)
-        {
-            return _context.Destino.Any(e => e.ID == id);
         }
     }
 }
