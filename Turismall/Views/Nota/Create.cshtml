@@ -1,7 +1,7 @@
 @model Turismall.Models.Nota
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Agregar";
 }
 
 <h2>Agregar nota</h2>
@@ -40,6 +40,9 @@
         @Html.HiddenFor(m => m.ViajeID)
 
         <div class="form-group">
+            <div class="col-md-2">
+                @Html.ActionLink("Volver", "Index", new { Controller = "Nota", idViaje = Model.ViajeID }, new { @class = "btn btn-default btn-sm" })
+            </div>
             <div class="col-md-10">
                 <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#saving"><span class="glyphicon glyphicon-floppy-disk" /><font face="sans-serif"> Agregar </font></button>
                 <div id="saving" class="modal fade" role="dialog">
@@ -55,10 +58,6 @@
         </div>
     </div>
 </form>
-
-<div>
-    @Html.ActionLink("Volver", "Index", new { Controller = "Nota", idViaje = Model.ViajeID }, new { @class = "btn btn-default btn-sm" })
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

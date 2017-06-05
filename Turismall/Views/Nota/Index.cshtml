@@ -1,7 +1,7 @@
 @model IEnumerable<Turismall.Models.Nota>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Notas";
 }
 
 <img height="200" class="center-block" src="@Url.Content("~/ListadoDeNotas.png")" />
@@ -29,5 +29,5 @@
     }
 </table>
 
-@Html.ActionLink("Agregar", "Create", new { Controller = "Nota", idViaje = @ViewBag.idViaje }, new { @class = "btn btn-default btn-sm" })
-@Html.ActionLink("Volver", "Index", new { Controller = "Viaje"}, new { @class = "btn btn-default btn-sm" })
+@Html.ActionLink("Agregar", "Create", new { Controller = "Nota", idViaje = @ViewBag.idViaje }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Volver", "Index", new { Controller = "Viaje"}, new { @class = "btn btn-default" })
