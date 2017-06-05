@@ -40,6 +40,7 @@ namespace Turismall.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Destino = _service.GetNombreDestino(nota.DestinoID);
             return View(nota);
         }
 

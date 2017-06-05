@@ -50,6 +50,15 @@ namespace Turismall.Services
             return _destinoRepository.GetAll();
         }
 
+        public String GetNombreDestino(int? destinoId)
+        {
+            if (destinoId == null)
+            {
+                return null;
+            }
+            return _destinoRepository.GetOne(x => x.ID == destinoId).Nombre;
+        }
+
         public void Create(Nota nota)
         {
             _repository.Insert(nota);

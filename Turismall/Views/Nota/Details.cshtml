@@ -20,7 +20,12 @@
         <dd>
             @Html.DisplayFor(model => model.Texto)
         </dd>
-           
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino)
+        </dt>
+        <dd>
+            @ViewBag.Destino
+        </dd>   
     </dl>
 </div>
 @if (Model.Foto != null)

@@ -12,6 +12,7 @@ namespace Turismall.Services
         DateTime GetMinFecha(int? viajeId);
         DateTime GetMaxFecha(int? viajeId);
         List<Destino> GetDestinos();
+        String GetNombreDestino(int? destinoId);
         void Create(Nota nota);
         void Update(Nota nota);
         void Save();
