@@ -12,6 +12,7 @@ namespace Turismall.Models
         public int ViajeID { get; set; }
         public virtual Viaje Viaje { get; set; }
 
+        [Required(ErrorMessage = "Debe seleccionarse un destino")]
         public int DestinoID { get; set; }
         public virtual Destino Destino { get; set; }
 
