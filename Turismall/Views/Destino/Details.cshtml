@@ -4,7 +4,12 @@
     ViewData["Title"] = "Detalle";
 }
 
-<h2 style="text-align:center">@Html.DisplayFor(model => model.Nombre)</h2>
+<br />
+<div class="center-block">
+    <a href="@Url.Content("~/Destinos/" + Model.FotoPortada)">
+        <img border="0" alt="Imagen" src="@Url.Content("~/Destinos/" + Model.FotoPortada)" width="1200" height="500">
+    </a>
+</div>
 <br />
 <div>
     <p>@Html.DisplayFor(model => model.Descripcion)</p>
