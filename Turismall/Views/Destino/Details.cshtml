@@ -4,16 +4,12 @@
     ViewData["Title"] = "Detalle";
 }
 
-<br />
 <div class="center-block">
     <a href="@Url.Content("~/Destinos/" + Model.FotoPortada)">
-        <img border="0" alt="Imagen" src="@Url.Content("~/Destinos/" + Model.FotoPortada)" width="1200" height="500">
+        <img border="0" alt="Imagen" src="@Url.Content("~/Destinos/" + Model.FotoPortada)" width="100%">
     </a>
 </div>
 <br />
-<div>
+<div class="well">
     <p>@Html.DisplayFor(model => model.Descripcion)</p>
-</div>
-<div>
-    <a asp-action="Index" class="btn btn-default"><span class="glyphicon glyphicon-backward" /></a>
 </div>
