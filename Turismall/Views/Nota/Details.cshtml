@@ -8,7 +8,7 @@
 <br />
 <div class="panel panel-default">
     <div class="panel-heading panel-primary"><span class="glyphicon glyphicon-calendar" /><font face="sans-serif"> @Html.DisplayFor(model => model.Fecha)</font></div>
-    <div class="panel-body"><span class="glyphicon glyphicon-globe" /><font face="sans-serif"><a asp-controller="Destino" asp-action="Details" asp-route-id="@Model.DestinoID"> @ViewBag.Destino</a></font></div>
+    <div class="panel-body"><span class="glyphicon glyphicon-map-marker" /><font face="sans-serif"><a asp-controller="Destino" asp-action="Details" asp-route-id="@Model.DestinoID"> @ViewBag.Destino</a></font></div>
     <div class="panel-body">@Html.DisplayFor(model => model.Texto)</div>
     
 </div>
