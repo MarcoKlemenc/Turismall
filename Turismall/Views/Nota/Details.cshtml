@@ -4,43 +4,21 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="btn-group-justified">
-    <div>
-        <a href="@Url.Action("Index", new { Controller = "Nota", idViaje = Model.ViajeID })" class="btn btn-default" style="float:right; margin-top:20px"><span class="glyphicon glyphicon-remove" /></a>
-        <img height="200" class="center-block" src="@Url.Content("~/DetallesDeLaNota.png")" />
-    </div>
-</div>
+<img height="200" class="img-responsive center-block" src="@Url.Content("~/DetallesDeLaNota.png")" />
 <br />
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Texto)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Texto)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Destino)
-        </dt>
-        <dd>
-            <a asp-controller="Destino" asp-action="Details" asp-route-id="@Model.DestinoID">@ViewBag.Destino</a>
-        </dd>   
-    </dl>
+<div class="panel panel-default">
+    <div class="panel-heading panel-primary"><span class="glyphicon glyphicon-calendar" /><font face="sans-serif"> @Html.DisplayFor(model => model.Fecha)</font></div>
+    <div class="panel-body"><span class="glyphicon glyphicon-globe" /><font face="sans-serif"><a asp-controller="Destino" asp-action="Details" asp-route-id="@Model.DestinoID"> @ViewBag.Destino</a></font></div>
+    <div class="panel-body">@Html.DisplayFor(model => model.Texto)</div>
+    
 </div>
 @if (Model.Foto != null)
 {
     <div class="row">
-        <div class="col-xs-6 col-md-3">
             <a href="@Url.Content("~/" + Model.Foto)">
-                <img border="0" alt="Imagen" src="@Url.Content("~/" + Model.Foto)" width="200" height="200">
+                <img border="0" class="img-thumbnail center-block" alt="Imagen" src="@Url.Content("~/" + Model.Foto)" style="max-width:200px">
             </a>          
-        </div>
+        
     </div>
 }
 
