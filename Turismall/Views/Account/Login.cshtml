@@ -23,17 +23,17 @@
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <div class="col-md-12">
-                        <input asp-for="Email" class="form-control" placeholder="Email"/>
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12">
-                        <input asp-for="Password" class="form-control" placeholder="Contraseña"/>
+                        <input asp-for="Password" class="form-control" placeholder="Contraseña" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#logging">Ingresar</button>
                         <div id="logging" class="modal fade" role="dialog">
@@ -50,6 +50,7 @@
             </form>
         </section>
     </div>
+
     <div class="col-md-4">
         <section>
             <h4>Utilizar otra cuenta</h4>
@@ -80,7 +81,6 @@
             }
         </section>
     </div>
-
 </div>
 
 @section Scripts {

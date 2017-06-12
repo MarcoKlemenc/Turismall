@@ -5,22 +5,24 @@
 }
 
 <img height="200" class="img-responsive center-block" src="@Url.Content("~/DetallesDeLaNota.png")" />
+
 <br />
+
 <div class="panel panel-default">
     <div class="panel-heading panel-primary"><span class="glyphicon glyphicon-calendar" /><font face="sans-serif"> @Html.DisplayFor(model => model.Fecha)</font></div>
     <div class="panel-body"><span class="glyphicon glyphicon-map-marker" /><font face="sans-serif"><a asp-controller="Destino" asp-action="Details" asp-route-id="@Model.DestinoID"> @ViewBag.Destino</a></font></div>
     <div class="panel-body">@Html.DisplayFor(model => model.Texto)</div>
-    
 </div>
+
 @if (Model.Foto != null)
 {
     <div class="row">
-            <a href="@Url.Content("~/" + Model.Foto)">
-                <img border="0" class="img-thumbnail center-block" alt="Imagen" src="@Url.Content("~/" + Model.Foto)" style="max-width:200px">
-            </a>          
-        
+        <a href="@Url.Content("~/" + Model.Foto)">
+            <img border="0" class="img-thumbnail center-block" alt="Imagen" src="@Url.Content("~/" + Model.Foto)" style="max-width:200px">
+        </a>
     </div>
 }
 
 <br />
+
 <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil" /><font face="sans-serif"> Editar</font></a>

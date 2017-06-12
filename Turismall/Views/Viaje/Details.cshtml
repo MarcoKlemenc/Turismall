@@ -9,7 +9,9 @@
         <img height="200" class="img-responsive center-block" src="@Url.Content("~/DetallesDelViaje.png")" />
     </div>
 </div>
+
 <br />
+
 <div class="row">
     <div class="col-md-9">
         <h4>@Html.DisplayFor(model => model.Nombre)</h4>
@@ -28,6 +30,8 @@
         @Html.ActionLink("Agregar nota", "Create", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default" })
     </div>
 </div>
+
 <br />
+
 <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil" /><font face="sans-serif"> Editar</font></a>
 
