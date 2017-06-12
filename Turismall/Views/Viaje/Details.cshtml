@@ -12,9 +12,11 @@
 
 <br />
 
-<div class="row">
-    <div class="col-md-9">
-        <h4>@Html.DisplayFor(model => model.Nombre)</h4>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>@Html.DisplayFor(model => model.Nombre)</strong>
+    </div>
+    <div class="panel-body">
         @if (String.IsNullOrEmpty(@Model.Descripcion))
         {
             <p>No hay descripción.</p>
@@ -24,14 +26,8 @@
             <p>@Html.DisplayFor(model => model.Descripcion)</p>
         }
     </div>
-
-    <div class="col-md-3" style="text-align:right">
-        @Html.ActionLink("Ver notas", "Index", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Agregar nota", "Create", new { Controller = "Nota", idViaje = Model.ID }, new { @class = "btn btn-default" })
-    </div>
 </div>
 
-<br />
-
 <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.ID"><span class="glyphicon glyphicon-pencil" /><font face="sans-serif"> Editar</font></a>
-
+<a href="@Url.Action("Index", new { Controller = "Nota", idViaje = Model.ID })" class="btn btn-default"><span class="glyphicon glyphicon-list" /><font face="sans-serif"> Ver notas</font></a>
+<a href="@Url.Action("Create", new { Controller = "Nota", idViaje = Model.ID })" class="btn btn-default"><span class="glyphicon glyphicon-plus" /><font face="sans-serif"> Agregar nota</font></a>
