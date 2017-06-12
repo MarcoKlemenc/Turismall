@@ -5,12 +5,7 @@
 }
 
 
-<div class="btn-group-justified">
-    <div>
-        <a asp-controller="Viaje" asp-action="Index" class="btn btn-default" style="float:right; margin-top:20px"><span class="glyphicon glyphicon-remove" /></a>
-        <img height="200" class="center-block" src="@Url.Content("~/ListadoDeNotas.png")" />
-    </div>
-</div>
+<img height="200" class="img-responsive center-block" src="@Url.Content("~/ListadoDeNotas.png")" />
 <h3 style="text-align:center">@ViewBag.viaje</h3>
 
 <p><a href="@Url.Action("Create", new { Controller = "Nota", idViaje = @ViewBag.idViaje })" class="btn btn-primary"><span class="glyphicon glyphicon-plus" /><font face="sans-serif"> Agregar</font></a></p>
