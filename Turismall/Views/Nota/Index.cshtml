@@ -23,14 +23,23 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td class="col-md-10">
-                <small>@Html.DisplayFor(modelItem => item.Fecha)</small>
-                <h4 style="max-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis ">@Html.DisplayFor(modelItem => item.Texto) </h4>
-            </td>
-            <td class="col-md-2" style="text-align: right">
-                <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil" /></a>
-                <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-file" /></a>
-                <a asp-action="Photo" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-picture" /></a>
+            <td>
+                <div class="row">
+                    <div class="col-md-11">
+                        <p style="max-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis ">@Html.DisplayFor(modelItem => item.Texto)</p>
+                    </div>
+                    <div class="col-md-1" style="text-align: right">
+                        <small>
+                                @Html.DisplayFor(modelItem => item.Fecha)
+                        </small>
+                        
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-pencil" /><font face="sans-serif"> Editar</font></a>
+                    <a asp-action="Details" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-list" /><font face="sans-serif"> Detalles</font></a>
+                    <a asp-action="Photo" class="btn btn-default" asp-route-id="@item.ID"><span class="glyphicon glyphicon-picture" /><font face="sans-serif"> Subir foto</font></a>
+                </div>
             </td>
         </tr>
     }
