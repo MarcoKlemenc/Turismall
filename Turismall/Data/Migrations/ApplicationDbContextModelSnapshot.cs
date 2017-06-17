@@ -182,6 +182,8 @@ namespace Turismall.Data.Migrations
 
                     b.Property<string>("FotoPortada");
 
+                    b.Property<string>("LugaresDescatados");
+
                     b.Property<string>("Nombre");
 
                     b.HasKey("ID");
