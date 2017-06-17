@@ -38,3 +38,17 @@
         </tr>
     }
 </table>
+
+@{String inicio = @ViewBag.inicio;}
+@{String fin = @ViewBag.fin;}
+@{String medio = @ViewBag.medio;}
+
+<iframe width="600"
+        height="450"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBDCXyJWzSE8dLkMKnMHawLr_u_RDHZ57w&origin=
+        @inicio
+        &destination=
+        @fin
+        &waypoints=
+        @medio" allowfullscreen></iframe>

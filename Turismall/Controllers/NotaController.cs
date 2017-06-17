@@ -27,6 +27,14 @@ namespace Turismall.Controllers
             {
                 return NotFound();
             }
+            String medio = "";
+            foreach (Nota n in notas)
+            {
+                medio += _service.GetNombreDestino(n.DestinoID) + "|";
+            }
+            ViewBag.inicio = _service.GetNombreDestino(notas[0].DestinoID);
+            ViewBag.fin = _service.GetNombreDestino(notas[notas.Count-1].DestinoID);
+            ViewBag.medio = medio.Remove(medio.Length - 1);
             ViewBag.viaje = _service.GetViajeName(idViaje);
             ViewBag.idViaje = idViaje;
             return View(notas);
