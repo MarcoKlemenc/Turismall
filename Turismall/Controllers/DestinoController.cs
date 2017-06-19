@@ -30,6 +30,11 @@ namespace Turismall.Controllers
             {
                 return NotFound();
             }
+            if (destino.LugaresDescatados != null)
+            {
+                string[] lugares = destino.LugaresDescatados.Split('#');
+                ViewBag.lugares = lugares;
+            }
             return View(destino);
         }
     }
