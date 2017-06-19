@@ -40,16 +40,15 @@
                 <span class="glyphicon glyphicon-chevron-right"></span>
                 <span class="sr-only">Next</span>
             </a>
+           
         </div>
     </div>
+    @if (Model.LugaresDescatados != null)
+    {
+        <div class="col-md-6">
+            <p>@Html.DisplayFor(model => model.LugaresDescatados)</p>
+        </div>
+    }
 </div>
 
-@if (Model.LugaresDescatados != null)
-{
-    <h4>
-        Lugares destacados
-    </h4>
-    <div class="well">
-        <p>@Html.DisplayFor(model => model.LugaresDescatados)</p>
-    </div>
-}
+
