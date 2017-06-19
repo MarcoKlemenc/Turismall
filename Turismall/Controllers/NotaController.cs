@@ -27,14 +27,32 @@ namespace Turismall.Controllers
             {
                 return NotFound();
             }
-            String medio = "";
-            foreach (Nota n in notas)
+            else if (notas.Count > 0)
             {
-                medio += _service.GetNombreDestino(n.DestinoID) + "|";
+                List<String> destinos = new List<String>();
+                foreach (Nota n in notas)
+                {
+                    String destino = _service.GetNombreDestino(n.DestinoID);
+                    if (destinos.Count == 0 || destinos[destinos.Count - 1] != destino)
+                    destinos.Add(destino);
+                }
+                String medio = "";
+                for (int i = 1; i < destinos.Count - 1; i++)
+                {
+                    medio += destinos[i] + "|";
+                }
+                
+                String src = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyBDCXyJWzSE8dLkMKnMHawLr_u_RDHZ57w&origin=";
+                src += destinos[0];
+                src += "&destination=";
+                src += destinos[destinos.Count - 1];
+                if (medio.Length > 0)
+                {
+                    src += "&waypoints=";
+                    src += medio.Remove(medio.Length - 1);
+                }
+                ViewBag.src = src;
             }
-            ViewBag.inicio = _service.GetNombreDestino(notas[0].DestinoID);
-            ViewBag.fin = _service.GetNombreDestino(notas[notas.Count-1].DestinoID);
-            ViewBag.medio = medio.Remove(medio.Length - 1);
             ViewBag.viaje = _service.GetViajeName(idViaje);
             ViewBag.idViaje = idViaje;
             return View(notas);
