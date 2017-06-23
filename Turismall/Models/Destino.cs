@@ -7,5 +7,7 @@
         public string Descripcion { get; set; }
         public string FotoPortada { get; set; }
         public string LugaresDescatados { get; set; }
+        public string LinkPronostico { get; set; }
+        public string LugarPronostico { get; set; }
     }
 }
