@@ -37,15 +37,15 @@ namespace Turismall.Controllers
                     destinos.Add(destino);
                 }
                 String medio = "";
-                for (int i = 1; i < destinos.Count - 1; i++)
+                for (int i = destinos.Count - 2; i >= 1; i--)
                 {
                     medio += destinos[i] + "|";
                 }
                 
                 String src = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyBDCXyJWzSE8dLkMKnMHawLr_u_RDHZ57w&origin=";
-                src += destinos[0];
-                src += "&destination=";
                 src += destinos[destinos.Count - 1];
+                src += "&destination=";
+                src += destinos[0];
                 if (medio.Length > 0)
                 {
                     src += "&waypoints=";
