@@ -8,12 +8,12 @@ namespace Turismall.Models.AccountViewModels
 {
     public class LoginViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage="Debe introducir un correo")]
+        [EmailAddress(ErrorMessage="El correo introducido no es válido")]
         [Display(Name = "Correo")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe introducir una constraseña")]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
