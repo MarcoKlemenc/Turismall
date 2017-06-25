@@ -15,7 +15,10 @@
 </div>
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#galeria">Galeria</a></li>
-    <li><a data-toggle="tab" href="#lugares">Lugares destacados</a></li>
+    @if (Model.LugaresDescatados != null)
+    {
+        <li><a data-toggle="tab" href="#lugares">Lugares destacados</a></li>
+    }
     <li><a data-toggle="tab" href="#pronostico">Pronostico</a></li>
 </ul>
 <div class="tab-content">
@@ -48,17 +51,17 @@
 
         </div>
     </div>
-    <div id="lugares" class="tab-pane fade">
-        @if (Model.LugaresDescatados != null)
-        {
+    @if (Model.LugaresDescatados != null)
+    {
+        <div id="lugares" class="tab-pane fade">
             <ul class="list-group">
-                    @foreach (var lugar in ViewBag.lugares)
-                    {
-                        <li class="list-group-item">@lugar</li>
-                    }
-                </ul>
-        }
-    </div>
+                @foreach (var lugar in ViewBag.lugares)
+                {
+                    <li class="list-group-item">@lugar</li>
+                }
+            </ul>
+        </div>
+    }
     <div id="pronostico" class="tab-pane fade">
         <a href="@Model.LinkPronostico" class="aw-widget-legal">
         </a><div id="awtd1497836852677" class="aw-widget-36hour" data-locationkey="@Model.LugarPronostico" data-unit="c" data-language="es" data-useip="false" data-uid="awtd1497836852677" data-editlocation="true"></div>
