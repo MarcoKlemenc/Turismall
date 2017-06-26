@@ -30,9 +30,9 @@
         <div class="form-group">
             <div class="col-md-12">
                 <select asp-for="DestinoID" class="form-control" asp-items="@(new SelectList(@ViewBag.Destinos,"Value", "Text"))">
-                    <option value="" disabled selected hidden>Selecciona un destino</option>
+                    <option selected hidden>Selecciona un destino</option>
                 </select>
-                <span asp-validation-for="DestinoID" class="text-danger"></span>
+                <span asp-validation-for="Destino" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
