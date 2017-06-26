@@ -103,6 +103,13 @@ namespace Turismall.Controllers
                 _service.UpdateFechas(nota);
                 return RedirectToAction("Index", new { idViaje = nota.ViajeID });
             }
+            var destinos = _service.GetDestinos();
+            var list = new List<SelectListItem>();
+            foreach (Destino d in destinos)
+            {
+                list.Add(new SelectListItem() { Text = d.Nombre, Value = d.ID.ToString() });
+            }
+            ViewBag.Destinos = list;
             return View(nota);
         }
 
@@ -146,6 +153,13 @@ namespace Turismall.Controllers
                 }
                 return RedirectToAction("Index", new { idViaje = nota.ViajeID });
             }
+            var destinos = _service.GetDestinos();
+            var list = new List<SelectListItem>();
+            foreach (Destino d in destinos)
+            {
+                list.Add(new SelectListItem() { Text = d.Nombre, Value = d.ID.ToString() });
+            }
+            ViewBag.Destinos = list;
             return View(nota);
         }
 
