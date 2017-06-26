@@ -8,8 +8,8 @@ namespace Turismall.Models.AccountViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Debe introducir un correo")]
+        [EmailAddress(ErrorMessage = "El correo introducido no es válido")]
         public string Email { get; set; }
     }
 }
