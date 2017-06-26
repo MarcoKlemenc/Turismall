@@ -14,6 +14,16 @@ namespace Turismall.Controllers
     {
         private readonly INotaService _service;
         
+        private List<SelectListItem> ObtenerDestinos()
+        {
+            var list = new List<SelectListItem>();
+            foreach (Destino d in _service.GetDestinos())
+            {
+                list.Add(new SelectListItem() { Text = d.Nombre, Value = d.ID.ToString() });
+            }
+            return list;
+        }
+
         public NotaController(INotaService service)
         {
             _service = service;
@@ -78,13 +88,7 @@ namespace Turismall.Controllers
                 ViajeID = idViaje,
                 Fecha = DateTime.Today
             };
-            var destinos = _service.GetDestinos();
-            var list = new List<SelectListItem>();
-            foreach (Destino d in destinos)
-            {
-                list.Add(new SelectListItem() { Text = d.Nombre, Value = d.ID.ToString() });
-            }
-            ViewBag.Destinos = list;
+            ViewBag.Destinos = ObtenerDestinos();
             return View(nota);
         }
 
@@ -103,13 +107,7 @@ namespace Turismall.Controllers
                 _service.UpdateFechas(nota);
                 return RedirectToAction("Index", new { idViaje = nota.ViajeID });
             }
-            var destinos = _service.GetDestinos();
-            var list = new List<SelectListItem>();
-            foreach (Destino d in destinos)
-            {
-                list.Add(new SelectListItem() { Text = d.Nombre, Value = d.ID.ToString() });
-            }
-            ViewBag.Destinos = list;
+            ViewBag.Destinos = ObtenerDestinos();
             return View(nota);
         }
 
@@ -121,13 +119,7 @@ namespace Turismall.Controllers
             {
                 return NotFound();
             }
-            var destinos = _service.GetDestinos();
-            var list = new List<SelectListItem>();
-            foreach (Destino d in destinos)
-            {
-                list.Add(new SelectListItem() { Text = d.Nombre, Value = d.ID.ToString() });
-            }
-            ViewBag.Destinos = list;
+            ViewBag.Destinos = ObtenerDestinos();
             return View(nota);
         }
 
@@ -153,13 +145,7 @@ namespace Turismall.Controllers
                 }
                 return RedirectToAction("Index", new { idViaje = nota.ViajeID });
             }
-            var destinos = _service.GetDestinos();
-            var list = new List<SelectListItem>();
-            foreach (Destino d in destinos)
-            {
-                list.Add(new SelectListItem() { Text = d.Nombre, Value = d.ID.ToString() });
-            }
-            ViewBag.Destinos = list;
+            ViewBag.Destinos = ObtenerDestinos();
             return View(nota);
         }
 
